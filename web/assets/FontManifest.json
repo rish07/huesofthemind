@@ -1,0 +1,26 @@
+[
+  {
+    "fonts": [
+      {
+        "asset": "fonts/MaterialIcons-Regular.ttf"
+      }
+    ],
+    "family": "MaterialIcons"
+  },
+  {
+    "family":"Montserrat",
+    "fonts":[
+      {
+        "asset":"fonts/Montserrat-Regular.ttf"
+      }
+    ]
+  },
+  {
+    "family":"Caveat",
+    "fonts":[
+      {
+        "asset":"fonts/Caveat-Regular.ttf"
+      }
+    ]
+  }
+]
