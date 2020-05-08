@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hues/about_us.dart';
+import 'package:hues/submit_post.dart';
 import 'responsive_widget.dart';
 
 class LandingPage extends StatefulWidget {
@@ -20,7 +21,10 @@ class _LandingPageState extends State<LandingPage> {
     super.dispose();
   }
 
-  List<Widget> _pages = [AboutUs()];
+  List<Widget> _pages = [
+    SubmitPost(),
+    AboutUs(),
+  ];
   int _selectedIndex = 0;
 
   @override
@@ -49,7 +53,10 @@ class _LandingPageState extends State<LandingPage> {
                     ),
                     child: Text('About Us'),
                     color: buttonColor2,
-                    onPressed: () {},
+                    onPressed: () {
+                      _controller.animateToPage(1,
+                          duration: Duration(seconds: 1), curve: Curves.easeIn);
+                    },
                   ),
                 ),
                 Padding(
@@ -61,7 +68,11 @@ class _LandingPageState extends State<LandingPage> {
                     ),
                     child: Text('Submit a post!'),
                     color: buttonColor1,
-                    onPressed: () {},
+                    onPressed: () {
+                      _controller.animateToPage(0,
+                          duration: Duration(seconds: 1),
+                          curve: Curves.easeInCubic);
+                    },
                   ),
                 ),
               ],
@@ -95,17 +106,51 @@ class _LandingPageState extends State<LandingPage> {
             ),
       drawer: ResponsiveWidget.isSmallScreen(context)
           ? Drawer(
-              child: ListView(),
+              child: ListView(
+                children: [
+                  DrawerHeader(
+                    child: null,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      backgroundBlendMode: BlendMode.dstATop,
+                      image: DecorationImage(
+                        image: AssetImage('drawer.jpg'),
+                      ),
+                    ),
+                    padding: EdgeInsets.zero,
+                    margin: EdgeInsets.zero,
+                  ),
+                  ListTile(
+                    title: Text('About Us'),
+                    onTap: () {
+                      _controller.animateToPage(1,
+                          duration: Duration(seconds: 1), curve: Curves.linear);
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('Submit a post'),
+                    onTap: () {
+                      _controller.animateToPage(0,
+                          duration: Duration(seconds: 1), curve: Curves.linear);
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
             )
           : null,
-      body: PageView(
-        scrollDirection: Axis.vertical,
-        controller: _controller,
-        children: _pages,
-        onPageChanged: (int index) {
-          _selectedIndex = index;
-          _controller.jumpToPage(index);
-        },
+      body: Scrollbar(
+        child: PageView(
+          pageSnapping: false,
+          scrollDirection: Axis.vertical,
+          controller: _controller,
+          children: _pages,
+          onPageChanged: (int index) {
+            _selectedIndex = index;
+            _controller.jumpToPage(index);
+          },
+        ),
       ),
     );
   }
