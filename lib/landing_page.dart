@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hues/about_us.dart';
 import 'package:hues/submit_post.dart';
@@ -142,7 +143,7 @@ class _LandingPageState extends State<LandingPage> {
           : null,
       body: Scrollbar(
         child: PageView(
-          pageSnapping: false,
+          dragStartBehavior: DragStartBehavior.down,
           scrollDirection: Axis.vertical,
           controller: _controller,
           children: _pages,

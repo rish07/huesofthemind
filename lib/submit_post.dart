@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hues/responsive_widget.dart';
 import 'package:image_picker_web/image_picker_web.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class SubmitPost extends StatefulWidget {
   @override
@@ -35,19 +36,19 @@ class _SubmitPostState extends State<SubmitPost> {
           child: Container(
             height: MediaQuery.of(context).size.height * 0.7,
             width: !ResponsiveWidget.isSmallScreen(context)
-                ? MediaQuery.of(context).size.width * 0.5
-                : MediaQuery.of(context).size.width * 0.8,
+                ? MediaQuery.of(context).size.width * 0.4
+                : MediaQuery.of(context).size.width * 0.7,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     'Please fill in the details:',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: MediaQuery.of(context).size.height * 0.05,
                   ),
                   Container(
                     child: TextFormField(
@@ -74,7 +75,7 @@ class _SubmitPostState extends State<SubmitPost> {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: MediaQuery.of(context).size.height * 0.02,
                   ),
                   Container(
                     child: TextFormField(
@@ -100,7 +101,7 @@ class _SubmitPostState extends State<SubmitPost> {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: MediaQuery.of(context).size.height * 0.02,
                   ),
                   Container(
                     child: TextFormField(
@@ -110,7 +111,8 @@ class _SubmitPostState extends State<SubmitPost> {
                         }
                         return null;
                       },
-                      maxLines: 13,
+                      maxLines:
+                          ResponsiveWidget.isSmallScreen(context) ? 4 : 10,
                       textCapitalization: TextCapitalization.words,
                       decoration: InputDecoration(
                         hintText: 'Write up',
@@ -134,55 +136,61 @@ class _SubmitPostState extends State<SubmitPost> {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: MediaQuery.of(context).size.height * 0.02,
                   ),
                   Row(
                     children: [
-                      Text('Upload an image to post:'),
-                      SizedBox(
-                        width: 20,
+                      Flexible(
+                        child: Text('Upload an image:   '),
                       ),
-                      MaterialButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
+                      Flexible(
+                        child: MaterialButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: AutoSizeText(
+                            'Choose a file',
+                            maxLines: 1,
+                          ),
+                          color: Colors.grey,
+                          onPressed: () {
+                            pickImage();
+                          },
                         ),
-                        child: Text('Choose a file'),
-                        color: Colors.grey,
-                        onPressed: () {
-                          pickImage();
-                        },
                       ),
                     ],
                   ),
                   SizedBox(
                     height: 30,
                   ),
-                  MaterialButton(
-                    minWidth: 200,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
+                  Flexible(
+                    child: MaterialButton(
+                      minWidth: 200,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
+                      color: Colors.black,
+                      onPressed: () {
+                        if (_formKey.currentState.validate() && imageExists) {
+                          Scaffold.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('working perfectly'),
+                            ),
+                          );
+                        } else if (imageExists == false) {
+                          Scaffold.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Please upload an Image!'),
+                            ),
+                          );
+                        }
+                      },
                     ),
-                    child: Text(
-                      'Submit',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white),
-                    ),
-                    color: Colors.black,
-                    onPressed: () {
-                      if (_formKey.currentState.validate() && imageExists) {
-                        Scaffold.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('working perfectly'),
-                          ),
-                        );
-                      } else if (imageExists == false) {
-                        Scaffold.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Please upload an Image!'),
-                          ),
-                        );
-                      }
-                    },
                   )
                 ],
               ),
