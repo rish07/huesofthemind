@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hues/about_us.dart';
 import 'responsive_widget.dart';
-import 'dart:html' as html;
 
 class LandingPage extends StatefulWidget {
   @override
@@ -14,13 +13,6 @@ class _LandingPageState extends State<LandingPage> {
   final Color buttonColor2 = Color(0xFFD5AC4E);
 
   PageController _controller = PageController(initialPage: 0);
-
-  @override
-  void initState() {
-    html.window.history.pushState(null, "landingPage", 'land');
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -77,11 +69,10 @@ class _LandingPageState extends State<LandingPage> {
           : AppBar(
               elevation: 0,
               iconTheme: IconThemeData(color: Colors.black),
-              centerTitle: true,
               title: Row(
                 children: <Widget>[
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.13,
+                    width: MediaQuery.of(context).size.width * 0.1,
                   ),
                   Image.asset(
                     'logo.png',

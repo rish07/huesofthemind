@@ -101,6 +101,7 @@ class AboutUs extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
+                    alignment: Alignment.center,
                     padding: EdgeInsets.all(8),
                     height: 100,
                     width: 100,
@@ -108,11 +109,14 @@ class AboutUs extends StatelessWidget {
                       'sunflower.png',
                     ),
                   ),
-                  Text(
-                    'Team Sahaara',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 40,
+                  Flexible(
+                    child: Text(
+                      'Team Sahaara',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 40,
+                      ),
                     ),
                   ),
                 ],
