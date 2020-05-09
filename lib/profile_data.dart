@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
@@ -135,8 +136,9 @@ Card profileCard({String name, String imagesrc, String caption}) {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
+                AutoSizeText(
                   name,
+                  maxLines: 1,
                   style: TextStyle(fontSize: 30),
                 ),
                 SizedBox(
@@ -174,13 +176,14 @@ Card smallProfileCard({String name, String imagesrc, String caption}) {
               radius: 50,
             ),
           ),
-          Text(
+          AutoSizeText(
             name,
+            maxLines: 1,
             style: TextStyle(fontSize: 30),
             textAlign: TextAlign.center,
           ),
           SizedBox(
-            height: 50,
+            height: 30,
           ),
           Text(
             caption,
