@@ -74,6 +74,10 @@ flutter:
     - family: Caveat
       fonts:
         - asset: web/assets/fonts/Caveat-Regular.ttf
+
+    - family: JustAnotherHand
+      fonts:
+        - asset: web/assets/fonts/JustAnotherHand-Regular.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #

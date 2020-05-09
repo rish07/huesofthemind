@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hues/about_us.dart';
 import 'package:hues/submit_post.dart';
 import 'responsive_widget.dart';
+import 'constants.dart';
 
 class LandingPage extends StatefulWidget {
   @override
@@ -10,10 +11,6 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-  final Color buttonColor1 = Color(0xFFFCD027);
-  final Color appBarBg = Color(0xFFFAF3EA);
-  final Color buttonColor2 = Color(0xFFD5AC4E);
-
   PageController _controller = PageController(initialPage: 0);
 
   @override
@@ -23,8 +20,8 @@ class _LandingPageState extends State<LandingPage> {
   }
 
   List<Widget> _pages = [
-    SubmitPost(),
     AboutUs(),
+    SubmitPost(),
   ];
   int _selectedIndex = 0;
 
@@ -37,7 +34,7 @@ class _LandingPageState extends State<LandingPage> {
                 'huesofthemind ',
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: 30,
+                    fontSize: 35,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Caveat'),
               ),
@@ -55,7 +52,7 @@ class _LandingPageState extends State<LandingPage> {
                     child: Text('About Us'),
                     color: buttonColor2,
                     onPressed: () {
-                      _controller.animateToPage(1,
+                      _controller.animateToPage(0,
                           duration: Duration(seconds: 1), curve: Curves.easeIn);
                     },
                   ),
@@ -70,7 +67,7 @@ class _LandingPageState extends State<LandingPage> {
                     child: Text('Submit a post!'),
                     color: buttonColor1,
                     onPressed: () {
-                      _controller.animateToPage(0,
+                      _controller.animateToPage(1,
                           duration: Duration(seconds: 1),
                           curve: Curves.easeInCubic);
                     },
@@ -94,7 +91,7 @@ class _LandingPageState extends State<LandingPage> {
                   Text(
                     'huesofthemind ',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 35,
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Caveat',
@@ -124,7 +121,7 @@ class _LandingPageState extends State<LandingPage> {
                   ListTile(
                     title: Text('About Us'),
                     onTap: () {
-                      _controller.animateToPage(1,
+                      _controller.animateToPage(0,
                           duration: Duration(seconds: 1), curve: Curves.linear);
                       Navigator.pop(context);
                     },
@@ -132,7 +129,7 @@ class _LandingPageState extends State<LandingPage> {
                   ListTile(
                     title: Text('Submit a post'),
                     onTap: () {
-                      _controller.animateToPage(0,
+                      _controller.animateToPage(1,
                           duration: Duration(seconds: 1), curve: Curves.linear);
                       Navigator.pop(context);
                     },
@@ -143,7 +140,7 @@ class _LandingPageState extends State<LandingPage> {
           : null,
       body: Scrollbar(
         child: PageView(
-          dragStartBehavior: DragStartBehavior.down,
+          pageSnapping: false,
           scrollDirection: Axis.vertical,
           controller: _controller,
           children: _pages,

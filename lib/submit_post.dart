@@ -11,6 +11,7 @@ class SubmitPost extends StatefulWidget {
 }
 
 class _SubmitPostState extends State<SubmitPost> {
+  final Color appBarBg = Color(0xFFFAF3EA);
   final _formKey = GlobalKey<FormState>();
   Image pickedImage;
   bool imageExists = false;
@@ -29,6 +30,7 @@ class _SubmitPostState extends State<SubmitPost> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: appBarBg,
       body: Form(
         key: _formKey,
         autovalidate: true,

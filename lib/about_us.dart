@@ -1,96 +1,23 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'responsive_widget.dart';
+import 'constants.dart';
+import 'profile_data.dart';
 
-class AboutUs extends StatelessWidget {
-  List<Widget> _profilesSmallScreen = [
-    Card(
-      color: Colors.amber,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30.0),
-              child: CircleAvatar(radius: 50),
-            ),
-            Text(
-              'Name',
-              style: TextStyle(fontSize: 30),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Text(
-              'Caption',
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-    ),
-    Card(
-      color: Colors.red,
-      child: Text('2'),
-    ),
-    Card(
-      color: Colors.grey,
-      child: Text('3'),
-    ),
-    Card(
-      color: Colors.black,
-      child: Text('4'),
-    ),
-  ];
+class AboutUs extends StatefulWidget {
+  @override
+  _AboutUsState createState() => _AboutUsState();
+}
 
-  List<Widget> _profilesNormal = [
-    Card(
-      color: Colors.amber,
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                CircleAvatar(
-                  radius: 70,
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'Rishi Raj Singh',
-                    style: TextStyle(fontSize: 30),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    'My caption  diyucbuocn concoj wcwc iweujc ehc ejc e ciewhc jc oaj coa caj caihcc ajspaksmpxjas oha scojas oxkj asoh asoj scx',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
-  ];
+class _AboutUsState extends State<AboutUs> {
+  int _current = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFFAF3EA),
       body: Padding(
         padding: const EdgeInsets.only(top: 30.0, left: 16, right: 16),
         child: Center(
@@ -110,8 +37,9 @@ class AboutUs extends StatelessWidget {
                     ),
                   ),
                   Flexible(
-                    child: Text(
+                    child: AutoSizeText(
                       'Team Sahaara',
+                      maxLines: 1,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -121,27 +49,108 @@ class AboutUs extends StatelessWidget {
                   ),
                 ],
               ),
-              Container(
-                margin: ResponsiveWidget.isSmallScreen(context)
-                    ? null
-                    : EdgeInsets.only(top: 30),
-                height: ResponsiveWidget.isSmallScreen(context)
-                    ? MediaQuery.of(context).size.height * 0.7
-                    : MediaQuery.of(context).size.height * 0.5,
-                width: ResponsiveWidget.isSmallScreen(context)
-                    ? MediaQuery.of(context).size.width * 0.8
-                    : MediaQuery.of(context).size.width * 0.5,
-                child: CarouselSlider(
-                  items: ResponsiveWidget.isSmallScreen(context)
-                      ? _profilesSmallScreen
-                      : _profilesNormal,
-                  options: CarouselOptions(
-                    aspectRatio: 1,
-                    enlargeCenterPage: true,
-                    enableInfiniteScroll: true,
-                    initialPage: 0,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(right: 20),
+                    height: ResponsiveWidget.isSmallScreen(context)
+                        ? null
+                        : MediaQuery.of(context).size.height * 0.5,
+                    width: ResponsiveWidget.isSmallScreen(context)
+                        ? null
+                        : MediaQuery.of(context).size.width * 0.2,
+                    child: ResponsiveWidget.isSmallScreen(context)
+                        ? null
+                        : Image.asset(
+                            'lily.png',
+                            fit: BoxFit.contain,
+                          ),
                   ),
-                ),
+                  Column(
+                    children: [
+                      Container(
+                        margin: ResponsiveWidget.isSmallScreen(context)
+                            ? null
+                            : EdgeInsets.only(top: 30),
+                        height: ResponsiveWidget.isSmallScreen(context)
+                            ? MediaQuery.of(context).size.height * 0.7
+                            : MediaQuery.of(context).size.height * 0.5,
+                        width: ResponsiveWidget.isSmallScreen(context)
+                            ? MediaQuery.of(context).size.width * 0.8
+                            : MediaQuery.of(context).size.width * 0.5,
+                        child: CarouselSlider(
+                          items: !ResponsiveWidget.isLargeScreen(context)
+                              ? profilesSmallScreen
+                              : profilesNormal,
+                          options: CarouselOptions(
+                            autoPlayInterval: Duration(seconds: 5),
+                            autoPlayCurve: Curves.easeIn,
+                            autoPlay: true,
+                            onPageChanged: (index, reason) {
+                              setState(() {
+                                _current = index;
+                              });
+                            },
+                            aspectRatio: 1,
+                            enlargeCenterPage: true,
+                            enableInfiniteScroll: true,
+                            initialPage: 0,
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: ResponsiveWidget.isSmallScreen(context)
+                            ? profilesSmallScreen.map((url) {
+                                int index = profilesSmallScreen.indexOf(url);
+                                return Container(
+                                  width: 8.0,
+                                  height: 8.0,
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 5, horizontal: 20),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: _current == index
+                                        ? Color.fromRGBO(0, 0, 0, 0.9)
+                                        : Color.fromRGBO(0, 0, 0, 0.4),
+                                  ),
+                                );
+                              }).toList()
+                            : profilesNormal.map((url) {
+                                int index = profilesNormal.indexOf(url);
+                                return Container(
+                                  width: 8.0,
+                                  height: 8.0,
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 20),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: _current == index
+                                        ? Color.fromRGBO(0, 0, 0, 0.9)
+                                        : Color.fromRGBO(0, 0, 0, 0.4),
+                                  ),
+                                );
+                              }).toList(),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    height: ResponsiveWidget.isSmallScreen(context)
+                        ? null
+                        : MediaQuery.of(context).size.height * 0.5,
+                    width: ResponsiveWidget.isSmallScreen(context)
+                        ? null
+                        : MediaQuery.of(context).size.width * 0.2,
+                    child: ResponsiveWidget.isSmallScreen(context)
+                        ? null
+                        : Image.asset(
+                            'tulip.png',
+                            fit: BoxFit.contain,
+                          ),
+                  ),
+                ],
               ),
             ],
           ),
