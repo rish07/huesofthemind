@@ -38,7 +38,8 @@ List<Widget> profilesSmallScreen = [
   smallProfileCard(
     name: 'Shristi',
     imagesrc: randomCat,
-    caption: randomCaption,
+    caption:
+        '        "We create a world where we feel obligated to put on a smile. We tell everyone we’re doing well, we Instagram pictures of our lives to prove that we’re living the dream, even when it’s not. Editorials are believed to be the heart and soul of any information generating platform. All it takes is a simple question to open the doors to potentially saving someone’s life. HOTM is a platform for you to express, to cry, to laugh, to simply, talk.',
   ),
   //Rohit
   smallProfileCard(
@@ -91,7 +92,8 @@ List<Widget> profilesNormal = [
   profileCard(
     name: 'Shristi',
     imagesrc: randomCat,
-    caption: randomCaption,
+    caption:
+        "We create a world where we feel obligated to put on a smile. We tell everyone we’re doing well, we Instagram pictures of our lives to prove that we’re living the dream, even when it’s not.'Editorials are believed to be the heart and soul of any information generating platform. All it takes is a simple question to open the doors to potentially saving someone’s life. HOTM is a platform for you to express, to cry, to laugh, to simply, talk.",
   ),
   //Rohit
   profileCard(
@@ -179,7 +181,7 @@ Card smallProfileCard({String name, String imagesrc, String caption}) {
           AutoSizeText(
             name,
             maxLines: 1,
-            style: TextStyle(fontSize: 30),
+            style: TextStyle(fontFamily: 'Caveat', fontSize: 30),
             textAlign: TextAlign.center,
           ),
           SizedBox(
@@ -188,7 +190,9 @@ Card smallProfileCard({String name, String imagesrc, String caption}) {
           Text(
             caption,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20, fontFamily: 'Caveat'),
+            style: TextStyle(
+              fontSize: 15,
+            ),
           ),
         ],
       ),
