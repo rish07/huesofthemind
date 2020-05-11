@@ -1,4 +1,4 @@
-# hues
+# Huesofthemind
 
 A new Flutter application.
 
