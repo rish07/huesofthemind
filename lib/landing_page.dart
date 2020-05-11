@@ -1,3 +1,4 @@
+import 'package:hues/post_page.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:hues/about_us.dart';
@@ -22,6 +23,7 @@ class _LandingPageState extends State<LandingPage> {
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
   List<Widget> _pages = [
+    PostPage(),
     AboutUs(),
     SubmitPost(),
   ];
@@ -154,6 +156,7 @@ class _LandingPageState extends State<LandingPage> {
         controller: _refreshController,
         onRefresh: _onRefresh,
         child: ListView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           controller: _controller,
           shrinkWrap: true,
           children: _pages,

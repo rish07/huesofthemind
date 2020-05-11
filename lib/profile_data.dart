@@ -11,27 +11,31 @@ List<Widget> profilesSmallScreen = [
   smallProfileCard(
     name: 'Manasi Gupta',
     imagesrc: randomCat,
-    caption: randomCaption,
+    caption:
+        'Huesofthemind is a place where we empower and inspire each other through stories, ideas adn experiences. It is my heart.',
   ),
   //Lavanya
   smallProfileCard(
     name: 'Lavanya',
     imagesrc: randomCat,
-    caption: randomCaption,
+    caption:
+        "This page means a lot to me. It has become my coping mechanism and always lets the ray of positivity in me. I don't know what else to say. It just means a lot to me",
   ),
 
   //Rishi
   smallProfileCard(
     name: 'Rishi Raj Singh',
     imagesrc: 'profile/rishi.jpeg',
-    caption: randomCaption,
+    caption:
+        "I've always wanted to share what's going on in my mind without being judged. Huesofthemind is a similar platform, it's my #safeplace",
   ),
 
   //Shrey
   smallProfileCard(
     name: 'Shrey',
     imagesrc: randomCat,
-    caption: randomCaption,
+    caption:
+        "Huesofthemind has inspired and motivated me to become a better person with each passing day.",
   ),
 
   //Shristi
@@ -39,13 +43,14 @@ List<Widget> profilesSmallScreen = [
     name: 'Shristi',
     imagesrc: randomCat,
     caption:
-        '        "We create a world where we feel obligated to put on a smile. We tell everyone we’re doing well, we Instagram pictures of our lives to prove that we’re living the dream, even when it’s not. Editorials are believed to be the heart and soul of any information generating platform. All it takes is a simple question to open the doors to potentially saving someone’s life. HOTM is a platform for you to express, to cry, to laugh, to simply, talk.',
+        "We create a world where we feel obligated to put on a smile. We tell everyone we’re doing well, we Instagram pictures of our lives to prove that we’re living the dream, even when it’s not. Editorials are believed to be the heart and soul of any information generating platform. All it takes is a simple question to open the doors to potentially saving someone’s life. HOTM is a platform for you to express, to cry, to laugh, to simply, talk.",
   ),
   //Rohit
   smallProfileCard(
     name: 'Rohit',
-    imagesrc: randomCat,
-    caption: randomCaption,
+    imagesrc: 'profile/rohit.jpg',
+    caption:
+        "I am another 18 year old boy trying to figure out things and I believe that words combined with appropriate visuals can make a huge impact on the world.",
   ),
 
   //Goutam
@@ -68,25 +73,29 @@ List<Widget> profilesNormal = [
   profileCard(
     name: 'Manasi Gupta',
     imagesrc: randomCat,
-    caption: randomCaption,
+    caption:
+        'Huesofthemind is a place where we empower and inspire each other through stories, ideas adn experiences. It is my heart.',
   ),
   //Lavanya
   profileCard(
     name: 'Lavanya',
     imagesrc: randomCat,
-    caption: randomCaption,
+    caption:
+        "This page means a lot to me. It has become my coping mechanism and always lets the ray of positivity in me. I don't know what else to say. It just means a lot to me",
   ),
   //Rishi
   profileCard(
     name: 'Rishi Raj Singh',
     imagesrc: 'profile/rishi.jpeg',
-    caption: randomCaption,
+    caption:
+        "I've always wanted to share what's going on in my mind without being judged. Huesofthemind is a similar platform, it's my #safeplace",
   ),
   //Shrey
   profileCard(
     name: 'Shrey',
     imagesrc: randomCat,
-    caption: randomCaption,
+    caption:
+        "Huesofthemind has inspired and motivated me to become a better person with each passing day.",
   ),
   //Shristi
   profileCard(
@@ -98,8 +107,9 @@ List<Widget> profilesNormal = [
   //Rohit
   profileCard(
     name: 'Rohit',
-    imagesrc: randomCat,
-    caption: randomCaption,
+    imagesrc: 'profile/rohit.jpg',
+    caption:
+        "I am another 18 year old boy trying to figure out things and I believe that words combined with appropriate visuals can make a huge impact on the world",
   ),
   //Goutam
   profileCard(
@@ -141,7 +151,7 @@ Card profileCard({String name, String imagesrc, String caption}) {
                 AutoSizeText(
                   name,
                   maxLines: 1,
-                  style: TextStyle(fontFamily: 'Caveat', fontSize: 40),
+                  style: TextStyle(fontSize: 40),
                 ),
                 SizedBox(
                   height: 20,
@@ -149,7 +159,7 @@ Card profileCard({String name, String imagesrc, String caption}) {
                 Text(
                   caption,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontFamily: 'Satisfy', fontSize: 25),
                 ),
               ],
             ),
@@ -181,18 +191,19 @@ Card smallProfileCard({String name, String imagesrc, String caption}) {
           AutoSizeText(
             name,
             maxLines: 1,
-            style: TextStyle(fontFamily: 'Caveat', fontSize: 30),
+            style: TextStyle(fontSize: 30),
             textAlign: TextAlign.center,
           ),
           SizedBox(
-            height: 20,
+            height: 30,
           ),
           AutoSizeText(
             caption,
             maxLines: 5,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 14,
+              fontFamily: 'Satisfy',
+              fontSize: 16,
             ),
           ),
         ],
