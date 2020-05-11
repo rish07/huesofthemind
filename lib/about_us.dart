@@ -16,9 +16,11 @@ class _AboutUsState extends State<AboutUs> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFFAF3EA),
-      body: Padding(
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      color: Color(0xFFFAF3EA),
+      child: Padding(
         padding: const EdgeInsets.only(top: 30.0, left: 16, right: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

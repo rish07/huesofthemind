@@ -29,9 +29,11 @@ class _SubmitPostState extends State<SubmitPost> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: appBarBg,
-      body: Form(
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      color: appBarBg,
+      child: Form(
         key: _formKey,
         autovalidate: true,
         child: Center(

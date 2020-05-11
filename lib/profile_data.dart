@@ -141,7 +141,7 @@ Card profileCard({String name, String imagesrc, String caption}) {
                 AutoSizeText(
                   name,
                   maxLines: 1,
-                  style: TextStyle(fontSize: 30),
+                  style: TextStyle(fontFamily: 'Caveat', fontSize: 40),
                 ),
                 SizedBox(
                   height: 20,
@@ -149,7 +149,7 @@ Card profileCard({String name, String imagesrc, String caption}) {
                 Text(
                   caption,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontFamily: 'Caveat', fontSize: 20),
+                  style: TextStyle(fontSize: 20),
                 ),
               ],
             ),
@@ -185,13 +185,14 @@ Card smallProfileCard({String name, String imagesrc, String caption}) {
             textAlign: TextAlign.center,
           ),
           SizedBox(
-            height: 30,
+            height: 20,
           ),
-          Text(
+          AutoSizeText(
             caption,
+            maxLines: 5,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 14,
             ),
           ),
         ],

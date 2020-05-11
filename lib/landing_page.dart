@@ -1,4 +1,4 @@
-import 'package:flutter/gestures.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:hues/about_us.dart';
 import 'package:hues/submit_post.dart';
@@ -11,7 +11,7 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-  PageController _controller = PageController(initialPage: 0);
+  ScrollController _controller = ScrollController();
 
   @override
   void dispose() {
@@ -19,11 +19,19 @@ class _LandingPageState extends State<LandingPage> {
     super.dispose();
   }
 
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
   List<Widget> _pages = [
     AboutUs(),
     SubmitPost(),
   ];
-  int _selectedIndex = 0;
+  void _onRefresh() async {
+    setState(() {});
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
+    _refreshController.refreshCompleted();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +60,8 @@ class _LandingPageState extends State<LandingPage> {
                     child: Text('About Us'),
                     color: buttonColor2,
                     onPressed: () {
-                      _controller.animateToPage(0,
+                      double height = MediaQuery.of(context).size.height;
+                      _controller.animateTo(-height,
                           duration: Duration(seconds: 1), curve: Curves.easeIn);
                     },
                   ),
@@ -67,9 +76,9 @@ class _LandingPageState extends State<LandingPage> {
                     child: Text('Submit a post!'),
                     color: buttonColor1,
                     onPressed: () {
-                      _controller.animateToPage(1,
-                          duration: Duration(seconds: 1),
-                          curve: Curves.easeInCubic);
+                      double height = MediaQuery.of(context).size.height;
+                      _controller.animateTo(height,
+                          duration: Duration(seconds: 1), curve: Curves.easeIn);
                     },
                   ),
                 ),
@@ -121,16 +130,18 @@ class _LandingPageState extends State<LandingPage> {
                   ListTile(
                     title: Text('About Us'),
                     onTap: () {
-                      _controller.animateToPage(0,
-                          duration: Duration(seconds: 1), curve: Curves.linear);
+                      double height = MediaQuery.of(context).size.height;
+                      _controller.animateTo(-height,
+                          duration: Duration(seconds: 1), curve: Curves.easeIn);
                       Navigator.pop(context);
                     },
                   ),
                   ListTile(
                     title: Text('Submit a post'),
                     onTap: () {
-                      _controller.animateToPage(1,
-                          duration: Duration(seconds: 1), curve: Curves.linear);
+                      double height = MediaQuery.of(context).size.height;
+                      _controller.animateTo(height,
+                          duration: Duration(seconds: 1), curve: Curves.easeIn);
                       Navigator.pop(context);
                     },
                   ),
@@ -138,16 +149,14 @@ class _LandingPageState extends State<LandingPage> {
               ),
             )
           : null,
-      body: Scrollbar(
-        child: PageView(
-          pageSnapping: false,
-          scrollDirection: Axis.vertical,
+      body: SmartRefresher(
+        enablePullDown: true,
+        controller: _refreshController,
+        onRefresh: _onRefresh,
+        child: ListView(
           controller: _controller,
+          shrinkWrap: true,
           children: _pages,
-          onPageChanged: (int index) {
-            _selectedIndex = index;
-            _controller.jumpToPage(index);
-          },
         ),
       ),
     );
