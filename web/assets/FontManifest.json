@@ -22,5 +22,13 @@
         "asset":"fonts/Caveat-Regular.ttf"
       }
     ]
+  },
+  {
+    "family":"Satisfy",
+    "fonts":[
+      {
+        "asset":"fonts/Satisfy-Regular.ttf"
+      }
+    ]
   }
 ]

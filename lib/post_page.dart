@@ -10,25 +10,21 @@ class PostPage extends StatefulWidget {
 
 class _PostPageState extends State<PostPage> {
   final String apiUrl =
-      "https://instagram9.p.rapidapi.com/api/instagram?kullaniciadi=huesofthemind&lang=en";
+      "https://graph.instagram.com/me/media?fields=caption,permalink,media_url&access_token=${DotEnv().env['ACCESS_TOKEN']}";
 
   Future fetchPosts() async {
     print('working=============================');
     var result = await http.get(
       apiUrl,
-      headers: {
-        'x-rapidapi-host': DotEnv().env['API_HOST'],
-        'x-rapidapi-key': DotEnv().env['API_KEY'],
-      },
     );
 
-    print(json.decode(result.body)['posts'][0]);
+    print(json.decode(result.body)['data'][0]);
     return json.decode(result.body);
   }
 
   @override
   void initState() {
-    fetchPosts();
+    //fetchPosts();
     // TODO: implement initState
     super.initState();
   }

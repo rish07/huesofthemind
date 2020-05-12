@@ -9,11 +9,10 @@ const String randomCat = 'profile/cat.jpeg';
 List<Widget> profilesSmallScreen = [
   //Manasi
   smallProfileCard(
-    name: 'Manasi Gupta',
-    imagesrc: randomCat,
-    caption:
-        'Huesofthemind is a place where we empower and inspire each other through stories, ideas adn experiences. It is my heart.',
-  ),
+      name: 'Manasi Gupta',
+      imagesrc: 'profile/manasi.jpg',
+      caption:
+          "Huesofthemind is a safe space, a place to empower each other. I founded this organisation a year ago and I couldn’t be more proud of all that we as a team have achieved and provided to the society. To lots of more positivity, understanding and joy!"),
   //Lavanya
   smallProfileCard(
     name: 'Lavanya',
@@ -40,11 +39,10 @@ List<Widget> profilesSmallScreen = [
 
   //Shristi
   smallProfileCard(
-    name: 'Shristi',
-    imagesrc: randomCat,
-    caption:
-        "We create a world where we feel obligated to put on a smile. We tell everyone we’re doing well, we Instagram pictures of our lives to prove that we’re living the dream, even when it’s not. Editorials are believed to be the heart and soul of any information generating platform. All it takes is a simple question to open the doors to potentially saving someone’s life. HOTM is a platform for you to express, to cry, to laugh, to simply, talk.",
-  ),
+      name: 'Shristi',
+      imagesrc: 'profile/shristi.jpg',
+      caption:
+          "All it takes is a simple question to open the doors to potentially saving someone’s life. HOTM is a platform for you to express, to cry, to laugh, to simply, talk."),
   //Rohit
   smallProfileCard(
     name: 'Rohit',
@@ -57,7 +55,8 @@ List<Widget> profilesSmallScreen = [
   smallProfileCard(
     name: 'Goutam Sree Govind',
     imagesrc: 'profile/goutam.jpg',
-    caption: randomCaption,
+    caption:
+        "Huesofthemind is a place for me to  do more than just design, it lets me spread happiness! I love the warm and positive vibe of our team because it matches my own. 😄",
   ),
 
   //Nomit
@@ -71,11 +70,10 @@ List<Widget> profilesSmallScreen = [
 List<Widget> profilesNormal = [
   //Manasi
   profileCard(
-    name: 'Manasi Gupta',
-    imagesrc: randomCat,
-    caption:
-        'Huesofthemind is a place where we empower and inspire each other through stories, ideas adn experiences. It is my heart.',
-  ),
+      name: 'Manasi Gupta',
+      imagesrc: 'profile/manasi.jpg',
+      caption:
+          "Huesofthemind is a safe space, a place to empower each other. I founded this organisation a year ago and I couldn’t be more proud of all that we as a team have achieved and provided to the society. To lots of more positivity, understanding and joy!"),
   //Lavanya
   profileCard(
     name: 'Lavanya',
@@ -99,11 +97,10 @@ List<Widget> profilesNormal = [
   ),
   //Shristi
   profileCard(
-    name: 'Shristi',
-    imagesrc: randomCat,
-    caption:
-        "We create a world where we feel obligated to put on a smile. We tell everyone we’re doing well, we Instagram pictures of our lives to prove that we’re living the dream, even when it’s not.'Editorials are believed to be the heart and soul of any information generating platform. All it takes is a simple question to open the doors to potentially saving someone’s life. HOTM is a platform for you to express, to cry, to laugh, to simply, talk.",
-  ),
+      name: 'Shristi',
+      imagesrc: 'profile/shristi.jpg',
+      caption:
+          "All it takes is a simple question to open the doors to potentially saving someone’s life. HOTM is a platform for you to express, to cry, to laugh, to simply, talk."),
   //Rohit
   profileCard(
     name: 'Rohit',
@@ -115,7 +112,8 @@ List<Widget> profilesNormal = [
   profileCard(
     name: 'Goutam Sree Govind',
     imagesrc: 'profile/goutam.jpg',
-    caption: randomCaption,
+    caption:
+        "Huesofthemind is a place for me to  do more than just design, it lets me spread happiness! I love the warm and positive vibe of our team because it matches my own. 😄",
   ),
   //Nomit
   profileCard(
