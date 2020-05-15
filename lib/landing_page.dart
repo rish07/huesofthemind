@@ -5,8 +5,13 @@ import 'package:hues/about_us.dart';
 import 'package:hues/submit_post.dart';
 import 'responsive_widget.dart';
 import 'constants.dart';
+import 'post_page.dart';
 
 class LandingPage extends StatefulWidget {
+  final List posts;
+
+  const LandingPage({Key key, this.posts}) : super(key: key);
+
   @override
   _LandingPageState createState() => _LandingPageState();
 }
@@ -36,6 +41,12 @@ class _LandingPageState extends State<LandingPage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: !ResponsiveWidget.isSmallScreen(context)
@@ -52,6 +63,22 @@ class _LandingPageState extends State<LandingPage> {
               elevation: 0,
               backgroundColor: appBarBg,
               actions: <Widget>[
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                  child: MaterialButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text('Recent posts'),
+                    color: buttonColor2,
+                    onPressed: () {
+                      double height = MediaQuery.of(context).size.height;
+                      _controller.animateTo(height,
+                          duration: Duration(seconds: 1), curve: Curves.easeIn);
+                    },
+                  ),
+                ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),

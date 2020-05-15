@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:hues/constants.dart';
 import 'package:hues/landing_page.dart';
 
 Future main() async {
