@@ -16,7 +16,7 @@ List<Widget> profilesSmallScreen = [
   //Lavanya
   smallProfileCard(
     name: 'Lavanya',
-    imagesrc: randomCat,
+    imagesrc: 'profile/lava.JPG',
     caption:
         "This page means a lot to me. It has become my coping mechanism and always lets the ray of positivity in me. I don't know what else to say. It just means a lot to me",
   ),
@@ -62,8 +62,9 @@ List<Widget> profilesSmallScreen = [
   //Nomit
   smallProfileCard(
     name: 'Nomit',
-    imagesrc: randomCat,
-    caption: randomCaption,
+    imagesrc: 'profile/nomit.jpg',
+    caption:
+        "Providing a platform for people to express themselves without any fear of judgment and working together towards eliminating the stigma of mental illness is something that I deeply connect with. I'm grateful that with HOTM, I get to be a part of something bigger than myself.",
   )
 ];
 
@@ -77,7 +78,7 @@ List<Widget> profilesNormal = [
   //Lavanya
   profileCard(
     name: 'Lavanya',
-    imagesrc: randomCat,
+    imagesrc: 'profile/lava.JPG',
     caption:
         "This page means a lot to me. It has become my coping mechanism and always lets the ray of positivity in me. I don't know what else to say. It just means a lot to me",
   ),
@@ -118,8 +119,9 @@ List<Widget> profilesNormal = [
   //Nomit
   profileCard(
     name: 'Nomit',
-    imagesrc: randomCat,
-    caption: randomCaption,
+    imagesrc: 'profile/nomit.jpg',
+    caption:
+        "Providing a platform for people to express themselves without any fear of judgment and working together towards eliminating the stigma of mental illness is something that I deeply connect with. I'm grateful that with HOTM, I get to be a part of something bigger than myself.",
   ),
 ];
 

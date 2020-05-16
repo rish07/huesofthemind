@@ -27,7 +27,7 @@ class _PostPageState extends State<PostPage> {
   List posts = [];
   String temp;
 
-  Future fetchPosts(BuildContext context) async {
+  Future fetchPosts() async {
     print('working=============================');
     var result = await http.get(
       apiUrl,
@@ -94,7 +94,7 @@ class _PostPageState extends State<PostPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    fetchPosts(context);
+    //fetchPosts();
   }
 
   @override
