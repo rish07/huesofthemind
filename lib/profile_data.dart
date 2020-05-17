@@ -9,7 +9,7 @@ const String randomCat = 'profile/cat.jpeg';
 List<Widget> profilesSmallScreen = [
   //Manasi
   smallProfileCard(
-      name: 'Manasi Gupta',
+      name: 'Manasi',
       imagesrc: 'profile/manasi.jpg',
       caption:
           "Huesofthemind is a safe space, a place to empower each other. I founded this organisation a year ago and I couldn’t be more proud of all that we as a team have achieved and provided to the society. To lots of more positivity, understanding and joy!"),
@@ -23,7 +23,7 @@ List<Widget> profilesSmallScreen = [
 
   //Rishi
   smallProfileCard(
-    name: 'Rishi Raj Singh',
+    name: 'Rishi',
     imagesrc: 'profile/rishi.jpeg',
     caption:
         "I've always wanted to share what's going on in my mind without being judged. Huesofthemind is a similar platform, it's my #safeplace",
@@ -53,7 +53,7 @@ List<Widget> profilesSmallScreen = [
 
   //Goutam
   smallProfileCard(
-    name: 'Goutam Sree Govind',
+    name: 'Goutam',
     imagesrc: 'profile/goutam.jpg',
     caption:
         "Huesofthemind is a place for me to  do more than just design, it lets me spread happiness! I love the warm and positive vibe of our team because it matches my own. 😄",
@@ -71,7 +71,7 @@ List<Widget> profilesSmallScreen = [
 List<Widget> profilesNormal = [
   //Manasi
   profileCard(
-      name: 'Manasi Gupta',
+      name: 'Manasi',
       imagesrc: 'profile/manasi.jpg',
       caption:
           "Huesofthemind is a safe space, a place to empower each other. I founded this organisation a year ago and I couldn’t be more proud of all that we as a team have achieved and provided to the society. To lots of more positivity, understanding and joy!"),
@@ -84,7 +84,7 @@ List<Widget> profilesNormal = [
   ),
   //Rishi
   profileCard(
-    name: 'Rishi Raj Singh',
+    name: 'Rishi',
     imagesrc: 'profile/rishi.jpeg',
     caption:
         "I've always wanted to share what's going on in my mind without being judged. Huesofthemind is a similar platform, it's my #safeplace",
@@ -111,7 +111,7 @@ List<Widget> profilesNormal = [
   ),
   //Goutam
   profileCard(
-    name: 'Goutam Sree Govind',
+    name: 'Goutam',
     imagesrc: 'profile/goutam.jpg',
     caption:
         "Huesofthemind is a place for me to  do more than just design, it lets me spread happiness! I love the warm and positive vibe of our team because it matches my own. 😄",

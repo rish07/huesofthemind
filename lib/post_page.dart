@@ -1,4 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -15,13 +17,12 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPageState extends State<PostPage> {
+  ScrollController _controller = ScrollController();
   List<Widget> _cardsTopLarge = [];
   List<Widget> _cardsBottomLarge = [];
   List<Widget> _cardsTopMedium = [];
   List<Widget> _cardsBottomMedium = [];
-  List<Widget> _cardsTopSmall = [];
-  List<Widget> _cardsMiddleSmall = [];
-  List<Widget> _cardsBottomSmall = [];
+
   final String apiUrl =
       "https://graph.instagram.com/me/media?fields=caption,permalink,media_url&access_token=IGQVJXbkZADVTd1VERjQUQ5UmRZAeWhLTGt2U1REWWNvUFhVMDlQekwtTjYwUkFtNl8wN1JrOHc3bWlyMTNaenQzSXpsb1RTYXlTMG81SGlNSWZANMEFhMkRvMV81eDE2eEw1cVU3QTNB";
   List posts = [];
@@ -65,26 +66,6 @@ class _PostPageState extends State<PostPage> {
               imageUrl: posts[i + 4]['media_url']),
         );
       }
-      for (var i = 0; i < 2; i++) {
-        _cardsTopSmall.add(
-          postCard(
-              postLink: posts[i]['permalink'],
-              caption: posts[i]['caption'],
-              imageUrl: posts[i]['media_url']),
-        );
-        _cardsMiddleSmall.add(
-          postCard(
-              postLink: posts[i + 2]['permalink'],
-              caption: posts[i + 2]['caption'],
-              imageUrl: posts[i + 2]['media_url']),
-        );
-        _cardsBottomSmall.add(
-          postCard(
-              postLink: posts[i + 4]['permalink'],
-              caption: posts[i + 4]['caption'],
-              imageUrl: posts[i + 4]['media_url']),
-        );
-      }
     });
 
     return posts;
@@ -94,40 +75,71 @@ class _PostPageState extends State<PostPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    //fetchPosts();
+    fetchPosts();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: ResponsiveWidget.isSmallScreen(context)
+          ? MediaQuery.of(context).size.height * 0.8
+          : MediaQuery.of(context).size.height,
       color: appBarBg,
-      height: MediaQuery.of(context).size.height,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Row(
-                  children: ResponsiveWidget.isLargeScreen(context)
-                      ? _cardsTopLarge
-                      : ResponsiveWidget.isMediumScreen(context)
-                          ? _cardsTopMedium
-                          : _cardsTopSmall),
-              Row(
-                  children: ResponsiveWidget.isLargeScreen(context)
-                      ? _cardsBottomLarge
-                      : ResponsiveWidget.isMediumScreen(context)
-                          ? _cardsBottomMedium
-                          : _cardsMiddleSmall),
-              ResponsiveWidget.isSmallScreen(context)
-                  ? Row(children: _cardsBottomSmall)
-                  : Container(
-                      height: 0,
+        child: !ResponsiveWidget.isSmallScreen(context)
+            ? ListView(
+                shrinkWrap: true,
+                controller: _controller,
+                children: <Widget>[
+                  Row(
+                      children: ResponsiveWidget.isLargeScreen(context)
+                          ? _cardsTopLarge
+                          : _cardsTopMedium),
+                  Row(
+                      children: ResponsiveWidget.isLargeScreen(context)
+                          ? _cardsBottomLarge
+                          : _cardsBottomMedium),
+                ],
+              )
+            : GridView.count(
+                crossAxisCount: 3,
+                children: List<Widget>.generate(15, (index) {
+                  return GestureDetector(
+                    onTap: () {
+                      html.window.open(posts[index]['permalink'], 'instaId');
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              spreadRadius: 1,
+                              blurRadius: 1,
+                              offset: Offset(1, 1),
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(8),
+                          image: DecorationImage(
+                              image: NetworkImage(posts[index]['media_url']),
+                              fit: BoxFit.fill),
+                        ),
+                        height: 100,
+                        width: MediaQuery.of(context).size.width * 0.3,
+                      ),
                     ),
-            ],
-          ),
-        ),
+                  );
+                }),
+              ),
       ),
     );
   }
@@ -154,7 +166,7 @@ class _PostPageState extends State<PostPage> {
                 child: AutoSizeText(
                   caption,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 15),
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                   maxLines: 6,
                 ),

@@ -178,13 +178,11 @@ class _LandingPageState extends State<LandingPage> {
               ),
             )
           : null,
-      body: SmartRefresher(
-        enablePullDown: true,
-        controller: _refreshController,
-        onRefresh: _onRefresh,
+      body: SingleChildScrollView(
+        controller: _controller,
         child: ListView(
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           controller: _controller,
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           shrinkWrap: true,
           children: _pages,
         ),
