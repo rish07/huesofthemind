@@ -74,7 +74,7 @@ class _PostPageState extends State<PostPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    //fetchPosts();
+    fetchPosts();
   }
 
   @override
