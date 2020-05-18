@@ -18,6 +18,25 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+<script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-functions.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDI0CFhvdvD1B58LyzcQC2qd9mXXkEJ5cY",
+    authDomain: "huesofthemind-sahaara.firebaseapp.com",
+    databaseURL: "https://huesofthemind-sahaara.firebaseio.com",
+    projectId: "huesofthemind-sahaara",
+    storageBucket: "huesofthemind-sahaara.appspot.com",
+    messagingSenderId: "1060252598296",
+    appId: "1:1060252598296:web:b9220ba929316c6e85436d",
+    measurementId: "G-0675VG1VX6"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+</script>
+
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
@@ -28,6 +47,7 @@
       });
     }
   </script>
+
   <script src="main.dart.js" type="application/javascript"></script>
 </body>
 </html>

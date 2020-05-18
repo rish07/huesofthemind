@@ -7,11 +7,10 @@ import 'package:http/http.dart' as http;
 import 'package:hues/constants.dart';
 import 'package:hues/responsive_widget.dart';
 import 'dart:convert';
-import 'dart:html' as html;
 import 'package:hues/reusable_card.dart';
+import 'dart:html' as html;
 
 class PostPage extends StatefulWidget {
-  PostPage();
   @override
   _PostPageState createState() => _PostPageState();
 }
@@ -75,7 +74,7 @@ class _PostPageState extends State<PostPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    fetchPosts();
+    //fetchPosts();
   }
 
   @override
@@ -89,7 +88,7 @@ class _PostPageState extends State<PostPage> {
   Widget build(BuildContext context) {
     return Container(
       height: ResponsiveWidget.isSmallScreen(context)
-          ? MediaQuery.of(context).size.height * 0.8
+          ? MediaQuery.of(context).size.height * 0.85
           : MediaQuery.of(context).size.height,
       color: appBarBg,
       child: Padding(
@@ -117,7 +116,7 @@ class _PostPageState extends State<PostPage> {
                       html.window.open(posts[index]['permalink'], 'instaId');
                     },
                     child: Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(5.0),
                       child: Container(
                         decoration: BoxDecoration(
                           boxShadow: [
@@ -181,7 +180,8 @@ class _PostPageState extends State<PostPage> {
                     ),
                     color: appBarBg,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                     onPressed: () {
                       html.window.open(postLink, 'Post Link');
                     }),

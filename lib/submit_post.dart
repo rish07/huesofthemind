@@ -1,9 +1,13 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hues/responsive_widget.dart';
 import 'package:image_picker_web/image_picker_web.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cloud_functions/cloud_functions.dart';
+import 'dart:typed_data';
 
 class SubmitPost extends StatefulWidget {
   @override
@@ -11,24 +15,29 @@ class SubmitPost extends StatefulWidget {
 }
 
 class _SubmitPostState extends State<SubmitPost> {
+  String userName;
+  String userInsta;
+  String writeUp;
   final Color appBarBg = Color(0xFFFAF3EA);
   final _formKey = GlobalKey<FormState>();
-  Image pickedImage;
+  String pickedImage;
   bool imageExists = false;
   pickImage() async {
-    Image fromPicker = await ImagePickerWeb.getImage(
-      outputType: ImageType.widget,
-    );
-    if (fromPicker != null) {
+    Uint8List bytesFromPicker =
+        await ImagePickerWeb.getImage(outputType: ImageType.bytes);
+    if (bytesFromPicker != null) {
       setState(() {
         imageExists = true;
-        pickedImage = fromPicker;
+        pickedImage = base64Encode(bytesFromPicker);
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final HttpsCallable callable = CloudFunctions.instance
+        .getHttpsCallable(functionName: 'sendEmail')
+          ..timeout = const Duration(seconds: 30);
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
@@ -56,6 +65,9 @@ class _SubmitPostState extends State<SubmitPost> {
                   ),
                   Container(
                     child: TextFormField(
+                      onChanged: (value) {
+                        userName = value;
+                      },
                       textCapitalization: TextCapitalization.words,
                       decoration: InputDecoration(
                         hintText: 'Name',
@@ -83,6 +95,9 @@ class _SubmitPostState extends State<SubmitPost> {
                   ),
                   Container(
                     child: TextFormField(
+                      onChanged: (value) {
+                        userInsta = value;
+                      },
                       decoration: InputDecoration(
                         hintText: 'Instagram Username',
                         hintStyle: TextStyle(color: Colors.grey),
@@ -109,6 +124,9 @@ class _SubmitPostState extends State<SubmitPost> {
                   ),
                   Container(
                     child: TextFormField(
+                      onChanged: (value) {
+                        writeUp = value;
+                      },
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'This is a mandatory field';
@@ -179,7 +197,27 @@ class _SubmitPostState extends State<SubmitPost> {
                             fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                       color: Colors.black,
-                      onPressed: () {
+                      onPressed: () async {
+                        try {
+                          final HttpsCallableResult result =
+                              await callable.call({
+                            'name': userName,
+                            'insta': userInsta,
+                            'writeUp': writeUp,
+                            'image': pickedImage,
+                          });
+                          print(userName);
+                          print(userInsta);
+                          print(result.data);
+                        } on CloudFunctionsException catch (e) {
+                          print('caught firebase functions exception');
+                          print(e.code);
+                          print(e.message);
+                          print(e.details);
+                        } catch (e) {
+                          print('caught generic exception');
+                          print(e);
+                        }
                         if (_formKey.currentState.validate() && imageExists) {
                           Scaffold.of(context).showSnackBar(
                             SnackBar(
