@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:hues/constants.dart';
+import 'package:hues/landing_page.dart';
 import 'package:hues/responsive_widget.dart';
 import 'dart:convert';
 import 'package:hues/reusable_card.dart';
 import 'dart:html' as html;
+
+import 'package:hues/submit_post.dart';
 
 class PostPage extends StatefulWidget {
   @override
@@ -88,7 +91,7 @@ class _PostPageState extends State<PostPage> {
   Widget build(BuildContext context) {
     return Container(
       height: ResponsiveWidget.isSmallScreen(context)
-          ? MediaQuery.of(context).size.height * 0.85
+          ? MediaQuery.of(context).size.height * 0.9
           : MediaQuery.of(context).size.height,
       color: appBarBg,
       child: Padding(
@@ -108,36 +111,64 @@ class _PostPageState extends State<PostPage> {
                           : _cardsBottomMedium),
                 ],
               )
-            : GridView.count(
-                crossAxisCount: 3,
-                children: List<Widget>.generate(15, (index) {
-                  return GestureDetector(
-                    onTap: () {
-                      html.window.open(posts[index]['permalink'], 'instaId');
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              spreadRadius: 1,
-                              blurRadius: 1,
-                              offset: Offset(1, 1),
+            : Column(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.75,
+                    child: GridView.count(
+                      crossAxisCount: 3,
+                      children: List<Widget>.generate(15, (index) {
+                        return GestureDetector(
+                          onTap: () {
+                            html.window
+                                .open(posts[index]['permalink'], 'instaId');
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    spreadRadius: 1,
+                                    blurRadius: 1,
+                                    offset: Offset(1, 1),
+                                  ),
+                                ],
+                                borderRadius: BorderRadius.circular(8),
+                                image: DecorationImage(
+                                    image:
+                                        NetworkImage(posts[index]['media_url']),
+                                    fit: BoxFit.fill),
+                              ),
+                              height: 100,
+                              width: MediaQuery.of(context).size.width * 0.3,
                             ),
-                          ],
-                          borderRadius: BorderRadius.circular(8),
-                          image: DecorationImage(
-                              image: NetworkImage(posts[index]['media_url']),
-                              fit: BoxFit.fill),
-                        ),
-                        height: 100,
-                        width: MediaQuery.of(context).size.width * 0.3,
-                      ),
+                          ),
+                        );
+                      }),
                     ),
-                  );
-                }),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: MaterialButton(
+                        color: buttonColor1,
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Icon(Icons.keyboard_arrow_down,
+                            size: 30, color: Colors.black),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LandingPage(),
+                            ),
+                          );
+                        }),
+                  )
+                ],
               ),
       ),
     );

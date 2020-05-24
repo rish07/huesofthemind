@@ -36,6 +36,12 @@ List<Widget> profilesSmallScreen = [
     caption:
         "Huesofthemind has inspired and motivated me to become a better person with each passing day.",
   ),
+  //Kinnari
+  smallProfileCard(
+    name: 'Kinnari',
+    imagesrc: 'profile/kin.JPG',
+    caption: "Let's help each other grow, one day at a time :)",
+  ),
 
   //Shristi
   smallProfileCard(
@@ -95,6 +101,12 @@ List<Widget> profilesNormal = [
     imagesrc: randomCat,
     caption:
         "Huesofthemind has inspired and motivated me to become a better person with each passing day.",
+  ),
+  //Kinnari
+  profileCard(
+    name: 'Kinnari',
+    imagesrc: 'profile/kin.JPG',
+    caption: "Let's help each other grow, one day at a time :)",
   ),
   //Shristi
   profileCard(
