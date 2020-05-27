@@ -8,6 +8,8 @@ import 'package:image_picker_web/image_picker_web.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'dart:typed_data';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class SubmitPost extends StatefulWidget {
   @override
@@ -15,22 +17,34 @@ class SubmitPost extends StatefulWidget {
 }
 
 class _SubmitPostState extends State<SubmitPost> {
+  var postDbRef = Firestore.instance.collection('posts');
+  Uri imageUrl;
   String userName;
   String userInsta;
   String writeUp;
   final Color appBarBg = Color(0xFFFAF3EA);
   final _formKey = GlobalKey<FormState>();
-  String pickedImage;
+  File pickedImage;
   bool imageExists = false;
   pickImage() async {
-    Uint8List bytesFromPicker =
-        await ImagePickerWeb.getImage(outputType: ImageType.bytes);
-    if (bytesFromPicker != null) {
+    File fileFromPicker =
+        await ImagePickerWeb.getImage(outputType: ImageType.widget);
+    if (fileFromPicker != null) {
       setState(() {
         imageExists = true;
-        pickedImage = base64Encode(bytesFromPicker);
+        pickedImage = fileFromPicker;
       });
     }
+  }
+
+  Future<Uri> uploadImageFile({File image, String imageName}) async {
+    StorageReference storageRef =
+        FirebaseStorage().ref().child('postImages/$imageName');
+    StorageUploadTask uploadTask = storageRef.putFile(image);
+    Uri imageUri = await storageRef.getDownloadURL();
+    setState(() {
+      imageUrl = imageUri;
+    });
   }
 
   @override
@@ -198,6 +212,14 @@ class _SubmitPostState extends State<SubmitPost> {
                       ),
                       color: Colors.black,
                       onPressed: () async {
+                        await uploadImageFile(
+                            image: pickedImage, imageName: userName);
+                        await postDbRef.add({
+                          'name': userName,
+                          'insta': userInsta,
+                          'writeUp': writeUp,
+                          'imageUrl': imageUrl,
+                        });
                         try {
                           final HttpsCallableResult result =
                               await callable.call({

@@ -6,6 +6,7 @@ import 'package:hues/submit_post.dart';
 import 'responsive_widget.dart';
 import 'constants.dart';
 import 'post_page.dart';
+import 'package:indexed_list_view/indexed_list_view.dart';
 
 class LandingPage extends StatefulWidget {
   final List posts;
@@ -17,28 +18,13 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-  ScrollController _controller = ScrollController();
-
-  @override
-  void dispose() {
-    _controller.dispose(); // TODO: implement dispose
-    super.dispose();
-  }
-
-  RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
+  var controller = PageController();
+  int currentPage = 0;
   List<Widget> _pages = [
     PostPage(),
     AboutUs(),
     SubmitPost(),
   ];
-  void _onRefresh() async {
-    setState(() {});
-    // monitor network fetch
-    await Future.delayed(Duration(milliseconds: 1000));
-    // if failed,use refreshFailed()
-    _refreshController.refreshCompleted();
-  }
 
   @override
   void initState() {
@@ -73,8 +59,7 @@ class _LandingPageState extends State<LandingPage> {
                     child: Text('Recent posts'),
                     color: buttonColor2,
                     onPressed: () {
-                      double height = MediaQuery.of(context).size.height;
-                      _controller.animateTo(height,
+                      controller.animateToPage(0,
                           duration: Duration(seconds: 1), curve: Curves.easeIn);
                     },
                   ),
@@ -89,8 +74,7 @@ class _LandingPageState extends State<LandingPage> {
                     child: Text('About Us'),
                     color: buttonColor2,
                     onPressed: () {
-                      double height = MediaQuery.of(context).size.height;
-                      _controller.animateTo(-height,
+                      controller.animateToPage(1,
                           duration: Duration(seconds: 1), curve: Curves.easeIn);
                     },
                   ),
@@ -105,8 +89,7 @@ class _LandingPageState extends State<LandingPage> {
                     child: Text('Submit a post!'),
                     color: buttonColor1,
                     onPressed: () {
-                      double height = MediaQuery.of(context).size.height;
-                      _controller.animateTo(height,
+                      controller.animateToPage(2,
                           duration: Duration(seconds: 1), curve: Curves.easeIn);
                     },
                   ),
@@ -157,10 +140,17 @@ class _LandingPageState extends State<LandingPage> {
                     margin: EdgeInsets.zero,
                   ),
                   ListTile(
+                    title: Text('Recent Posts'),
+                    onTap: () {
+                      controller.animateToPage(0,
+                          duration: Duration(seconds: 1), curve: Curves.easeIn);
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
                     title: Text('About Us'),
                     onTap: () {
-                      double height = MediaQuery.of(context).size.height;
-                      _controller.animateTo(-height,
+                      controller.animateToPage(1,
                           duration: Duration(seconds: 1), curve: Curves.easeIn);
                       Navigator.pop(context);
                     },
@@ -168,25 +158,47 @@ class _LandingPageState extends State<LandingPage> {
                   ListTile(
                     title: Text('Submit a post'),
                     onTap: () {
-                      double height = MediaQuery.of(context).size.height;
-                      _controller.animateTo(height,
+                      print('working');
+
+                      controller.animateToPage(2,
                           duration: Duration(seconds: 1), curve: Curves.easeIn);
-                      Navigator.pop(context);
                     },
                   ),
                 ],
               ),
             )
           : null,
-      body: SingleChildScrollView(
-        controller: _controller,
-        child: ListView(
-          controller: _controller,
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          shrinkWrap: true,
-          children: _pages,
-        ),
+      body: PageView(
+        onPageChanged: (int page) {
+          setState(() {
+            currentPage = page;
+          });
+        },
+        controller: controller,
+        pageSnapping: false,
+        scrollDirection: Axis.vertical,
+        children: _pages,
       ),
+      floatingActionButton:
+          (ResponsiveWidget.isSmallScreen(context) && (currentPage == 0))
+              ? Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: MaterialButton(
+                      color: buttonColor1,
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Icon(Icons.keyboard_arrow_down,
+                          size: 30, color: Colors.black),
+                      onPressed: () {
+                        controller.animateToPage(1,
+                            duration: Duration(seconds: 1),
+                            curve: Curves.easeIn);
+                      }),
+                )
+              : null,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
