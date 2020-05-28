@@ -1,12 +1,11 @@
 import 'package:hues/post_page.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hues/about_us.dart';
 import 'package:hues/submit_post.dart';
 import 'responsive_widget.dart';
 import 'constants.dart';
 import 'post_page.dart';
-import 'package:indexed_list_view/indexed_list_view.dart';
 
 class LandingPage extends StatefulWidget {
   final List posts;

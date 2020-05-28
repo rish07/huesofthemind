@@ -2,16 +2,15 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:hues/constants.dart';
-import 'package:hues/landing_page.dart';
+
 import 'package:hues/responsive_widget.dart';
 import 'dart:convert';
 import 'package:hues/reusable_card.dart';
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
-
-import 'package:hues/submit_post.dart';
 
 class PostPage extends StatefulWidget {
   @override

@@ -1,9 +1,8 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'responsive_widget.dart';
-import 'constants.dart';
+
 import 'profile_data.dart';
 
 class AboutUs extends StatefulWidget {
