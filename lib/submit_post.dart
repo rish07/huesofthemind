@@ -85,9 +85,11 @@ class _SubmitPostState extends State<SubmitPost> {
           child: Center(
             child: Container(
               height: MediaQuery.of(context).size.height * 0.7,
-              width: !ResponsiveWidget.isSmallScreen(context)
-                  ? MediaQuery.of(context).size.width * 0.4
-                  : MediaQuery.of(context).size.width * 0.7,
+              width: ResponsiveWidget.isLargeScreen(context)
+                  ? MediaQuery.of(context).size.width * 0.25
+                  : ResponsiveWidget.isMediumScreen(context)
+                      ? MediaQuery.of(context).size.width * 0.4
+                      : MediaQuery.of(context).size.width * 0.7,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
