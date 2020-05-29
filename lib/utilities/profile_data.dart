@@ -67,11 +67,9 @@ List<Widget> profilesSmallScreen = [
 
   //Nomit
   smallProfileCard(
-    name: 'Nomit',
-    imagesrc: 'profile/nomit.jpg',
-    caption:
-        "Providing a platform for people to express themselves without any fear of judgment and working together towards eliminating the stigma of mental illness is something that I deeply connect with. I'm grateful that with HOTM, I get to be a part of something bigger than myself.",
-  )
+      name: 'Nomit',
+      imagesrc: 'profile/nomit.jpg',
+      caption: "Exploring ourselves and spreading courage along the way 🤸‍♂️")
 ];
 
 List<Widget> profilesNormal = [
@@ -130,11 +128,9 @@ List<Widget> profilesNormal = [
   ),
   //Nomit
   profileCard(
-    name: 'Nomit',
-    imagesrc: 'profile/nomit.jpg',
-    caption:
-        "Providing a platform for people to express themselves without any fear of judgment and working together towards eliminating the stigma of mental illness is something that I deeply connect with. I'm grateful that with HOTM, I get to be a part of something bigger than myself.",
-  ),
+      name: 'Nomit',
+      imagesrc: 'profile/nomit.jpg',
+      caption: "Exploring ourselves and spreading courage along the way 🤸‍♂️"),
 ];
 
 Card profileCard({String name, String imagesrc, String caption}) {

@@ -4,8 +4,9 @@ import 'dart:html';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:hues/constants.dart';
-import 'package:hues/responsive_widget.dart';
+import 'package:hues/utilities/constants.dart';
+import 'package:hues/utilities/hand_cursor.dart';
+import 'package:hues/utilities/responsive_widget.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -36,7 +37,8 @@ class _SubmitPostState extends State<SubmitPost> {
   TextEditingController _writeController = TextEditingController();
 
   Future<void> uploadImageFile(html.File image, {String imageName}) async {
-    fb.StorageReference storageRef = fb.storage().ref('images/$imageName');
+    fb.StorageReference storageRef =
+        fb.storage().ref('images/${imageName ?? DateTime.now()}');
     fb.UploadTaskSnapshot uploadTaskSnapshot =
         await storageRef.put(image).future;
 
@@ -213,23 +215,26 @@ class _SubmitPostState extends State<SubmitPost> {
                       height: MediaQuery.of(context).size.height * 0.02,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Flexible(
                           child: Text('Upload an image:   '),
                         ),
                         Flexible(
-                          child: MaterialButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
+                          child: HandCursor(
+                            child: MaterialButton(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: AutoSizeText(
+                                'Choose a file',
+                                maxLines: 1,
+                              ),
+                              color: Colors.grey,
+                              onPressed: () {
+                                uploadImage();
+                              },
                             ),
-                            child: AutoSizeText(
-                              'Choose a file',
-                              maxLines: 1,
-                            ),
-                            color: Colors.grey,
-                            onPressed: () {
-                              uploadImage();
-                            },
                           ),
                         ),
                       ],
@@ -238,52 +243,57 @@ class _SubmitPostState extends State<SubmitPost> {
                       height: 30,
                     ),
                     Flexible(
-                      child: MaterialButton(
-                        minWidth: 200,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Text(
-                          'Submit',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
-                        ),
-                        color: Colors.black,
-                        onPressed: () async {
-                          setState(() {
-                            isUploading = true;
-                          });
-                          await uploadImageFile(imageFile, imageName: userName);
-                          await postDbRef.add({
-                            'name': userName,
-                            'insta': userInsta,
-                            'writeUp': writeUp,
-                            'imageUrl': imageUrl,
-                          });
-
-                          if (_formKey.currentState.validate() && imageExists) {
-                            _writeController.clear();
-                            _instaController.clear();
-                            _nameController.clear();
+                      child: HandCursor(
+                        child: MaterialButton(
+                          minWidth: 200,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Text(
+                            'Submit',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          color: Colors.black,
+                          onPressed: () async {
                             setState(() {
-                              isUploading = false;
-                              imageExists = false;
-                              imageFile = null;
+                              isUploading = true;
+                            });
+                            await uploadImageFile(imageFile,
+                                imageName: userName);
+                            await postDbRef.add({
+                              'name': userName,
+                              'insta': userInsta,
+                              'writeUp': writeUp,
+                              'imageUrl': imageUrl,
                             });
 
-                            Scaffold.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Submitted Successfully!'),
-                              ),
-                            );
-                          } else if (imageExists == false) {
-                            Scaffold.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Please upload an Image!'),
-                              ),
-                            );
-                          }
-                        },
+                            if (_formKey.currentState.validate() &&
+                                imageExists) {
+                              _writeController.clear();
+                              _instaController.clear();
+                              _nameController.clear();
+                              setState(() {
+                                isUploading = false;
+                                imageExists = false;
+                                imageFile = null;
+                              });
+
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Submitted Successfully!'),
+                                ),
+                              );
+                            } else if (imageExists == false) {
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Please upload an Image!'),
+                                ),
+                              );
+                            }
+                          },
+                        ),
                       ),
                     )
                   ],

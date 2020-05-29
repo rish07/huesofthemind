@@ -1,9 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'responsive_widget.dart';
+import '../utilities/responsive_widget.dart';
 
-import 'profile_data.dart';
+import '../utilities/profile_data.dart';
 
 class AboutUs extends StatefulWidget {
   @override

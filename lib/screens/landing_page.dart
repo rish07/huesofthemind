@@ -1,14 +1,18 @@
-import 'package:hues/post_page.dart';
+import 'package:hues/screens/post_page.dart';
 
 import 'package:flutter/material.dart';
-import 'package:hues/about_us.dart';
-import 'package:hues/submit_post.dart';
-import 'responsive_widget.dart';
-import 'constants.dart';
+import 'package:hues/screens/about_us.dart';
+import 'package:hues/screens/submit_post.dart';
+import 'package:hues/utilities/hand_cursor.dart';
+import '../utilities/responsive_widget.dart';
+import '../utilities/constants.dart';
 import 'post_page.dart';
+import 'package:hues/widgets/postCard.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class LandingPage extends StatefulWidget {
-  final List posts;
+  final List<Widget> posts;
 
   const LandingPage({Key key, this.posts}) : super(key: key);
 
@@ -25,10 +29,71 @@ class _LandingPageState extends State<LandingPage> {
     SubmitPost(),
   ];
 
+  String temp;
+  final String apiUrl =
+      "https://graph.instagram.com/me/media?fields=caption,permalink,media_url&access_token=IGQVJXbkZADVTd1VERjQUQ5UmRZAeWhLTGt2U1REWWNvUFhVMDlQekwtTjYwUkFtNl8wN1JrOHc3bWlyMTNaenQzSXpsb1RTYXlTMG81SGlNSWZANMEFhMkRvMV81eDE2eEw1cVU3QTNB";
+
+  Future fetchPosts() async {
+    print('working=============================');
+    var result = await http.get(
+      apiUrl,
+    );
+    posts = json.decode(result.body)['data'];
+    print(posts[0]['media_url']);
+    setState(() {
+      print(posts.length);
+      temp = posts[0]['media_url'];
+      for (var i = 0; i < 6; i++) {
+        cardsTopLarge.add(
+          postCard(
+              context: context,
+              postLink: posts[i]['permalink'],
+              caption: posts[i]['caption'],
+              imageUrl: posts[i]['media_url']),
+        );
+        cardsBottomLarge.add(
+          postCard(
+              context: context,
+              postLink: posts[i + 6]['permalink'],
+              caption: posts[i + 6]['caption'],
+              imageUrl: posts[i + 6]['media_url']),
+        );
+      }
+      for (var i = 0; i < 4; i++) {
+        cardsTopMedium.add(
+          postCard(
+              context: context,
+              postLink: posts[i]['permalink'],
+              caption: posts[i]['caption'],
+              imageUrl: posts[i]['media_url']),
+        );
+        cardsBottomMedium.add(
+          postCard(
+              context: context,
+              postLink: posts[i + 4]['permalink'],
+              caption: posts[i + 4]['caption'],
+              imageUrl: posts[i + 4]['media_url']),
+        );
+      }
+      setState(() {
+        loading = false;
+      });
+    });
+
+    return posts;
+  }
+
   @override
   void initState() {
+    fetchPosts();
     // TODO: implement initState
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
@@ -51,46 +116,55 @@ class _LandingPageState extends State<LandingPage> {
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-                  child: MaterialButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                  child: HandCursor(
+                    child: MaterialButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text('Recent posts'),
+                      color: buttonColor2,
+                      onPressed: () {
+                        controller.animateToPage(0,
+                            duration: Duration(seconds: 1),
+                            curve: Curves.easeIn);
+                      },
                     ),
-                    child: Text('Recent posts'),
-                    color: buttonColor2,
-                    onPressed: () {
-                      controller.animateToPage(0,
-                          duration: Duration(seconds: 1), curve: Curves.easeIn);
-                    },
                   ),
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-                  child: MaterialButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      const EdgeInsets.only(top: 8.0, bottom: 8.0, right: 16),
+                  child: HandCursor(
+                    child: MaterialButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text('About Us'),
+                      color: buttonColor2,
+                      onPressed: () {
+                        controller.animateToPage(1,
+                            duration: Duration(seconds: 1),
+                            curve: Curves.easeIn);
+                      },
                     ),
-                    child: Text('About Us'),
-                    color: buttonColor2,
-                    onPressed: () {
-                      controller.animateToPage(1,
-                          duration: Duration(seconds: 1), curve: Curves.easeIn);
-                    },
                   ),
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-                  child: MaterialButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      const EdgeInsets.only(top: 8.0, bottom: 8.0, right: 16),
+                  child: HandCursor(
+                    child: MaterialButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text('Submit a post!'),
+                      color: buttonColor1,
+                      onPressed: () {
+                        controller.animateToPage(2,
+                            duration: Duration(seconds: 1),
+                            curve: Curves.easeIn);
+                      },
                     ),
-                    child: Text('Submit a post!'),
-                    color: buttonColor1,
-                    onPressed: () {
-                      controller.animateToPage(2,
-                          duration: Duration(seconds: 1), curve: Curves.easeIn);
-                    },
                   ),
                 ),
               ],
@@ -161,6 +235,7 @@ class _LandingPageState extends State<LandingPage> {
 
                       controller.animateToPage(2,
                           duration: Duration(seconds: 1), curve: Curves.easeIn);
+                      Navigator.pop(context);
                     },
                   ),
                 ],
