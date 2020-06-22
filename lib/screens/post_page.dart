@@ -95,7 +95,7 @@ class _PostPageState extends State<PostPage> {
                           height: MediaQuery.of(context).size.height * 0.75,
                           child: GridView.count(
                             crossAxisCount: 3,
-                            children: List<Widget>.generate(15, (index) {
+                            children: List<Widget>.generate(24, (index) {
                               return GestureDetector(
                                 onTap: () {
                                   html.window.open(
