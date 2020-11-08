@@ -6,8 +6,7 @@ import 'package:hues/utilities/constants.dart';
 import 'package:hues/utilities/hand_cursor.dart';
 import 'dart:html' as html;
 
-Expanded postCard(
-    {String caption, String imageUrl, String postLink, BuildContext context}) {
+Expanded postCard({String caption, String imageUrl, String postLink, BuildContext context}) {
   return Expanded(
     child: ReusableCard(
       colour: Colors.white,
@@ -29,7 +28,9 @@ Expanded postCard(
               child: AutoSizeText(
                 caption,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 12,
+                ),
                 textAlign: TextAlign.center,
                 maxLines: 6,
               ),
