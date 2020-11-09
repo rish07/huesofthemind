@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,7 @@ class _PostPageState extends State<PostPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return loading
         ? Container(
             decoration: BoxDecoration(color: appBarBg),
@@ -68,10 +70,7 @@ class _PostPageState extends State<PostPage> {
             ),
           )
         : Container(
-            height: ResponsiveWidget.isSmallScreen(context)
-                ? MediaQuery.of(context).size.height * 0.9
-                : MediaQuery.of(context).size.height,
-            color: appBarBg,
+            height: ResponsiveWidget.isSmallScreen(context) ? MediaQuery.of(context).size.height * 0.9 : MediaQuery.of(context).size.height,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: !ResponsiveWidget.isSmallScreen(context)
@@ -79,14 +78,35 @@ class _PostPageState extends State<PostPage> {
                       shrinkWrap: true,
                       controller: _controller,
                       children: <Widget>[
-                        Row(
-                            children: ResponsiveWidget.isLargeScreen(context)
-                                ? cardsTopLarge
-                                : cardsTopMedium),
-                        Row(
-                            children: ResponsiveWidget.isLargeScreen(context)
-                                ? cardsBottomLarge
-                                : cardsBottomMedium),
+                        Row(children: ResponsiveWidget.isLargeScreen(context) ? cardsTopLarge : cardsTopMedium),
+                        Row(children: ResponsiveWidget.isLargeScreen(context) ? cardsBottomLarge : cardsBottomMedium),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: ResponsiveWidget.isLargeScreen(context) ? size.width * 0.8 : size.width * 0.7,
+                            right: 10,
+                            top: 30,
+                          ),
+                          child: RaisedButton(
+                            color: Colors.white,
+                            hoverColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                              color: yellowColor,
+                              width: 3,
+                            )),
+                            padding: EdgeInsets.all(16),
+                            onPressed: () {
+                              html.window.open('https://www.instagram.com/huesofthemind/', 'Post Link');
+                            },
+                            child: Text(
+                              'View More Posts',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     )
                   : Column(
@@ -98,8 +118,7 @@ class _PostPageState extends State<PostPage> {
                             children: List<Widget>.generate(24, (index) {
                               return GestureDetector(
                                 onTap: () {
-                                  html.window.open(
-                                      posts[index]['permalink'], 'instaId');
+                                  html.window.open(posts[index]['permalink'], 'instaId');
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(5.0),
@@ -114,14 +133,10 @@ class _PostPageState extends State<PostPage> {
                                         ),
                                       ],
                                       borderRadius: BorderRadius.circular(8),
-                                      image: DecorationImage(
-                                          image: NetworkImage(
-                                              posts[index]['media_url']),
-                                          fit: BoxFit.fill),
+                                      image: DecorationImage(image: NetworkImage(posts[index]['media_url']), fit: BoxFit.fill),
                                     ),
                                     height: 100,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.3,
+                                    width: MediaQuery.of(context).size.width * 0.3,
                                   ),
                                 ),
                               );

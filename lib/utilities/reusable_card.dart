@@ -12,10 +12,6 @@ class ReusableCard extends StatelessWidget {
     return GestureDetector(
       onTap: onPress,
       child: Card(
-        elevation: 10,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
         margin: EdgeInsets.all(8),
         child: Container(
           child: cardChild,

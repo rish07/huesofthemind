@@ -7,11 +7,17 @@ import 'package:hues/utilities/hand_cursor.dart';
 import 'dart:html' as html;
 
 Expanded postCard({String caption, String imageUrl, String postLink, BuildContext context}) {
+  Size size = MediaQuery.of(context).size;
   return Expanded(
     child: ReusableCard(
       colour: Colors.white,
       cardChild: Container(
-        height: 420,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black,
+          ),
+        ),
+        height: 425,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -36,17 +42,19 @@ Expanded postCard({String caption, String imageUrl, String postLink, BuildContex
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: EdgeInsets.only(left: ResponsiveWidget.isMediumScreen(context) ? size.width * 0.17 : size.width * 0.3, right: 10, top: 5),
               child: HandCursor(
-                child: MaterialButton(
-                    elevation: 10,
+                child: OutlineButton(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 2,
+                    ),
                     child: AutoSizeText(
                       'Read more',
                       maxLines: 1,
-                    ),
-                    color: appBarBg,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     onPressed: () {
                       html.window.open(postLink, 'Post Link');

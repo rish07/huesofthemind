@@ -43,20 +43,20 @@ class _LandingPageState extends State<LandingPage> {
     setState(() {
       print(posts.length);
       temp = posts[0]['media_url'];
-      for (var i = 0; i < 6; i++) {
+      for (var i = 0; i < 5; i++) {
         cardsTopLarge.add(
           postCard(context: context, postLink: posts[i]['permalink'], caption: posts[i]['caption'], imageUrl: posts[i]['media_url']),
         );
         cardsBottomLarge.add(
-          postCard(context: context, postLink: posts[i + 6]['permalink'], caption: posts[i + 6]['caption'], imageUrl: posts[i + 6]['media_url']),
+          postCard(context: context, postLink: posts[i + 5]['permalink'], caption: posts[i + 5]['caption'], imageUrl: posts[i + 5]['media_url']),
         );
       }
-      for (var i = 0; i < 4; i++) {
+      for (var i = 0; i < 3; i++) {
         cardsTopMedium.add(
           postCard(context: context, postLink: posts[i]['permalink'], caption: posts[i]['caption'], imageUrl: posts[i]['media_url']),
         );
         cardsBottomMedium.add(
-          postCard(context: context, postLink: posts[i + 4]['permalink'], caption: posts[i + 4]['caption'], imageUrl: posts[i + 4]['media_url']),
+          postCard(context: context, postLink: posts[i + 3]['permalink'], caption: posts[i + 3]['caption'], imageUrl: posts[i + 3]['media_url']),
         );
       }
       setState(() {
