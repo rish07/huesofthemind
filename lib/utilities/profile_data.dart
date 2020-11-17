@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
-const String randomCaption =
-    "'This is a random caption to check how it looks. I never thought writing a random caption would be this hard. I cant even think what to write'";
+const String randomCaption = "'This is a random caption to check how it looks. I never thought writing a random caption would be this hard. I cant even think what to write'";
 
 const String randomCat = 'profile/cat.jpeg';
 List<Widget> profilesSmallScreen = [
@@ -17,24 +17,21 @@ List<Widget> profilesSmallScreen = [
   smallProfileCard(
     name: 'Lavanya',
     imagesrc: 'profile/lava.JPG',
-    caption:
-        "This page means a lot to me. It has become my coping mechanism and always lets the ray of positivity in me. I don't know what else to say. It just means a lot to me",
+    caption: "This page means a lot to me. It has become my coping mechanism and always lets the ray of positivity in me. I don't know what else to say. It just means a lot to me",
   ),
 
   //Rishi
   smallProfileCard(
     name: 'Rishi',
     imagesrc: 'profile/rishi.jpeg',
-    caption:
-        "I've always wanted to share what's going on in my mind without being judged. Huesofthemind is a similar platform, it's my #safeplace",
+    caption: "I've always wanted to share what's going on in my mind without being judged. Huesofthemind is a similar platform, it's my #safeplace",
   ),
 
   //Shrey
   smallProfileCard(
     name: 'Shrey',
     imagesrc: randomCat,
-    caption:
-        "Huesofthemind has inspired and motivated me to become a better person with each passing day.",
+    caption: "Huesofthemind has inspired and motivated me to become a better person with each passing day.",
   ),
   //Kinnari
   smallProfileCard(
@@ -53,8 +50,7 @@ List<Widget> profilesSmallScreen = [
   smallProfileCard(
     name: 'Rohit',
     imagesrc: 'profile/rohit.jpg',
-    caption:
-        "I am another 18 year old boy trying to figure out things and I believe that words combined with appropriate visuals can make a huge impact on the world.",
+    caption: "I am another 18 year old boy trying to figure out things and I believe that words combined with appropriate visuals can make a huge impact on the world.",
   ),
 
   //Goutam
@@ -66,10 +62,7 @@ List<Widget> profilesSmallScreen = [
   ),
 
   //Nomit
-  smallProfileCard(
-      name: 'Nomit',
-      imagesrc: 'profile/nomit.jpg',
-      caption: "Exploring ourselves and spreading courage along the way 🤸‍♂️")
+  smallProfileCard(name: 'Nomit', imagesrc: 'profile/nomit.jpg', caption: "Exploring ourselves and spreading courage along the way 🤸‍♂️")
 ];
 
 List<Widget> profilesNormal = [
@@ -83,22 +76,19 @@ List<Widget> profilesNormal = [
   profileCard(
     name: 'Lavanya',
     imagesrc: 'profile/lava.JPG',
-    caption:
-        "This page means a lot to me. It has become my coping mechanism and always lets the ray of positivity in me. I don't know what else to say. It just means a lot to me",
+    caption: "This page means a lot to me. It has become my coping mechanism and always lets the ray of positivity in me. I don't know what else to say. It just means a lot to me",
   ),
   //Rishi
   profileCard(
     name: 'Rishi',
     imagesrc: 'profile/rishi.jpeg',
-    caption:
-        "I've always wanted to share what's going on in my mind without being judged. Huesofthemind is a similar platform, it's my #safeplace",
+    caption: "I've always wanted to share what's going on in my mind without being judged. Huesofthemind is a similar platform, it's my #safeplace",
   ),
   //Shrey
   profileCard(
     name: 'Shrey',
     imagesrc: randomCat,
-    caption:
-        "Huesofthemind has inspired and motivated me to become a better person with each passing day.",
+    caption: "Huesofthemind has inspired and motivated me to become a better person with each passing day.",
   ),
   //Kinnari
   profileCard(
@@ -116,8 +106,7 @@ List<Widget> profilesNormal = [
   profileCard(
     name: 'Rohit',
     imagesrc: 'profile/rohit.jpg',
-    caption:
-        "I am another 18 year old boy trying to figure out things and I believe that words combined with appropriate visuals can make a huge impact on the world",
+    caption: "I am another 18 year old boy trying to figure out things and I believe that words combined with appropriate visuals can make a huge impact on the world",
   ),
   //Goutam
   profileCard(
@@ -127,26 +116,21 @@ List<Widget> profilesNormal = [
         "Huesofthemind is a place for me to  do more than just design, it lets me spread happiness! I love the warm and positive vibe of our team because it matches my own. 😄",
   ),
   //Nomit
-  profileCard(
-      name: 'Nomit',
-      imagesrc: 'profile/nomit.jpg',
-      caption: "Exploring ourselves and spreading courage along the way 🤸‍♂️"),
+  profileCard(name: 'Nomit', imagesrc: 'profile/nomit.jpg', caption: "Exploring ourselves and spreading courage along the way 🤸‍♂️"),
 ];
 
 Card profileCard({String name, String imagesrc, String caption}) {
   return Card(
-    color: cardColor,
+    color: Colors.white,
     child: Row(
       children: <Widget>[
         Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              CircleAvatar(
-                backgroundImage: AssetImage(imagesrc),
-                radius: 70,
-              ),
-            ],
+          child: Container(
+            padding: EdgeInsets.all(8),
+            child: Image.asset(
+              imagesrc,
+              fit: BoxFit.fill,
+            ),
           ),
         ),
         Expanded(
@@ -154,19 +138,26 @@ Card profileCard({String name, String imagesrc, String caption}) {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                AutoSizeText(
-                  name,
-                  maxLines: 1,
-                  style: TextStyle(fontSize: 40),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AutoSizeText(
+                      name,
+                      maxLines: 1,
+                      style: TextStyle(fontSize: 40),
+                    ),
+                    Icon(Icons.camera_alt)
+                  ],
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 Text(
                   caption,
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.justify,
                   style: TextStyle(fontFamily: 'Satisfy', fontSize: 25),
                 ),
               ],

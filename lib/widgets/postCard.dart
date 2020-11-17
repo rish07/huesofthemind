@@ -44,10 +44,13 @@ Expanded postCard({String caption, String imageUrl, String postLink, BuildContex
             Padding(
               padding: EdgeInsets.only(left: ResponsiveWidget.isMediumScreen(context) ? size.width * 0.17 : size.width * 0.3, right: 10, top: 5),
               child: HandCursor(
-                child: OutlineButton(
-                    borderSide: BorderSide(
-                      color: Colors.black,
-                      width: 2,
+                child: RaisedButton(
+                    color: Colors.white,
+                    hoverColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Colors.black,
+                      ),
                     ),
                     child: AutoSizeText(
                       'Read more',
