@@ -90,7 +90,7 @@ class _AboutUsState extends State<AboutUs> {
                       : profilesNormal.map((url) {
                           int index = profilesNormal.indexOf(url);
                           return Container(
-                            width: 8.0,
+                            width: 8.5,
                             height: 8.0,
                             margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                             decoration: BoxDecoration(
