@@ -10,8 +10,6 @@ class HandCursor extends Listener {
             onPointerHover: (PointerHoverEvent evt) {
               appContainer.style.cursor = 'pointer';
             },
-            onPointerExit: (PointerExitEvent evt) {
-              appContainer.style.cursor = 'default';
-            },
+
             child: child);
 }
