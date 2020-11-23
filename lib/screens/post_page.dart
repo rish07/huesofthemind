@@ -1,20 +1,13 @@
 import 'dart:async';
-
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:hues/widgets/postCard.dart';
-import 'package:http/http.dart' as http;
-import 'package:hues/utilities/constants.dart';
-import 'package:hues/utilities/hand_cursor.dart';
-
-import 'package:hues/utilities/responsive_widget.dart';
-import 'dart:convert';
-import 'package:hues/utilities/reusable_card.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
+
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hues/utilities/constants.dart';
+import 'package:hues/utilities/responsive_widget.dart';
 
 class PostPage extends StatefulWidget {
   @override
@@ -50,7 +43,6 @@ class _PostPageState extends State<PostPage> {
     Size size = MediaQuery.of(context).size;
     return loading
         ? Container(
-            decoration: BoxDecoration(color: appBarBg),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -70,43 +62,96 @@ class _PostPageState extends State<PostPage> {
             ),
           )
         : Container(
-            height: ResponsiveWidget.isSmallScreen(context) ? MediaQuery.of(context).size.height * 0.9 : MediaQuery.of(context).size.height,
+            height: ResponsiveWidget.isSmallScreen(context)
+                ? MediaQuery.of(context).size.height * 0.9
+                : MediaQuery.of(context).size.height,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: !ResponsiveWidget.isSmallScreen(context)
-                  ? ListView(
-                      shrinkWrap: true,
-                      controller: _controller,
+                  ? Column(
                       children: <Widget>[
-                        Row(children: ResponsiveWidget.isLargeScreen(context) ? cardsTopLarge : cardsTopMedium),
-                        Row(children: ResponsiveWidget.isLargeScreen(context) ? cardsBottomLarge : cardsBottomMedium),
                         Padding(
-                          padding: EdgeInsets.only(
-                            left: ResponsiveWidget.isLargeScreen(context) ? size.width * 0.8 : size.width * 0.7,
-                            right: 10,
-                            top: 30,
+                          padding: const EdgeInsets.only(
+                            right: 8.0,
+                            bottom: 10,
                           ),
-                          child: RaisedButton(
-                            color: Colors.white,
-                            hoverColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                              color: yellowColor,
-                              width: 3,
-                            )),
-                            padding: EdgeInsets.all(16),
-                            onPressed: () {
-                              html.window.open('https://www.instagram.com/huesofthemind/', 'Post Link');
-                            },
-                            child: Text(
-                              'View More Posts',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    height: 26,
+                                    width: 20,
+                                    child: VerticalDivider(
+                                      width: 2,
+                                      thickness: 4,
+                                      color: yellowColor,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Stories by the ',
+                                    style: TextStyle(
+                                      fontSize: ResponsiveWidget.isLargeScreen(
+                                              context)
+                                          ? 22
+                                          : 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'people',
+                                    style: TextStyle(
+                                      color: yellowColor,
+                                      fontSize: ResponsiveWidget.isLargeScreen(
+                                              context)
+                                          ? 22
+                                          : 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
+                              RaisedButton(
+                                color: Colors.white,
+                                hoverColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                  color: yellowColor,
+                                  width: 3,
+                                )),
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 18,
+                                  horizontal: 32,
+                                ),
+                                onPressed: () {
+                                  html.window.open(
+                                      'https://www.instagram.com/huesofthemind/',
+                                      'Post Link');
+                                },
+                                child: Text(
+                                  'Want to share your story?',
+                                  style: TextStyle(
+                                    fontSize:
+                                        ResponsiveWidget.isLargeScreen(context)
+                                            ? 18
+                                            : 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
+                        Row(
+                            children: ResponsiveWidget.isLargeScreen(context)
+                                ? cardsTopLarge
+                                : cardsTopMedium),
+                        Row(
+                            children: ResponsiveWidget.isLargeScreen(context)
+                                ? cardsBottomLarge
+                                : cardsBottomMedium),
                       ],
                     )
                   : Column(
@@ -118,7 +163,8 @@ class _PostPageState extends State<PostPage> {
                             children: List<Widget>.generate(24, (index) {
                               return GestureDetector(
                                 onTap: () {
-                                  html.window.open(posts[index]['permalink'], 'instaId');
+                                  html.window.open(
+                                      posts[index]['permalink'], 'instaId');
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(5.0),
@@ -133,10 +179,14 @@ class _PostPageState extends State<PostPage> {
                                         ),
                                       ],
                                       borderRadius: BorderRadius.circular(8),
-                                      image: DecorationImage(image: NetworkImage(posts[index]['media_url']), fit: BoxFit.fill),
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                              posts[index]['media_url']),
+                                          fit: BoxFit.fill),
                                     ),
                                     height: 100,
-                                    width: MediaQuery.of(context).size.width * 0.3,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.3,
                                   ),
                                 ),
                               );

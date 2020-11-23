@@ -1,15 +1,16 @@
-import 'package:hues/screens/post_page.dart';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:hues/screens/about_us.dart';
+import 'package:hues/screens/post_page.dart';
 import 'package:hues/screens/submit_post.dart';
 import 'package:hues/utilities/hand_cursor.dart';
-import '../utilities/responsive_widget.dart';
-import '../utilities/constants.dart';
-import 'post_page.dart';
 import 'package:hues/widgets/postCard.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+
+import '../utilities/constants.dart';
+import '../utilities/responsive_widget.dart';
+import 'post_page.dart';
 
 class LandingPage extends StatefulWidget {
   final List<Widget> posts;
@@ -21,6 +22,7 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+  int _activeTab = 1;
   var controller = PageController();
   int currentPage = 0;
   List<Widget> _pages = [
@@ -45,18 +47,34 @@ class _LandingPageState extends State<LandingPage> {
       temp = posts[0]['media_url'];
       for (var i = 0; i < 5; i++) {
         cardsTopLarge.add(
-          postCard(context: context, postLink: posts[i]['permalink'], caption: posts[i]['caption'], imageUrl: posts[i]['media_url']),
+          postCard(
+              context: context,
+              postLink: posts[i]['permalink'],
+              caption: posts[i]['caption'],
+              imageUrl: posts[i]['media_url']),
         );
         cardsBottomLarge.add(
-          postCard(context: context, postLink: posts[i + 5]['permalink'], caption: posts[i + 5]['caption'], imageUrl: posts[i + 5]['media_url']),
+          postCard(
+              context: context,
+              postLink: posts[i + 5]['permalink'],
+              caption: posts[i + 5]['caption'],
+              imageUrl: posts[i + 5]['media_url']),
         );
       }
       for (var i = 0; i < 3; i++) {
         cardsTopMedium.add(
-          postCard(context: context, postLink: posts[i]['permalink'], caption: posts[i]['caption'], imageUrl: posts[i]['media_url']),
+          postCard(
+              context: context,
+              postLink: posts[i]['permalink'],
+              caption: posts[i]['caption'],
+              imageUrl: posts[i]['media_url']),
         );
         cardsBottomMedium.add(
-          postCard(context: context, postLink: posts[i + 3]['permalink'], caption: posts[i + 3]['caption'], imageUrl: posts[i + 3]['media_url']),
+          postCard(
+              context: context,
+              postLink: posts[i + 3]['permalink'],
+              caption: posts[i + 3]['caption'],
+              imageUrl: posts[i + 3]['media_url']),
         );
       }
       setState(() {
@@ -87,53 +105,198 @@ class _LandingPageState extends State<LandingPage> {
           ? AppBar(
               title: Text(
                 'huesofthemind ',
-                style: TextStyle(color: Colors.black, fontSize: 35, fontWeight: FontWeight.bold, fontFamily: 'Caveat'),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Caveat'),
               ),
-              leading: Image.asset('logo.png'),
+              leading: CircleAvatar(
+                child: Image.asset('logo.png'),
+              ),
               elevation: 0,
-              backgroundColor: appBarBg,
+              backgroundColor: Colors.transparent,
               actions: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
                   child: HandCursor(
-                    child: MaterialButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                    child: FlatButton(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            'Recent Events',
+                            style: TextStyle(
+                              fontSize: ResponsiveWidget.isLargeScreen(context)
+                                  ? 22
+                                  : 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Container(
+                            height: 10,
+                            width: ResponsiveWidget.isLargeScreen(context)
+                                ? 50
+                                : 30,
+                            child: Divider(
+                              thickness: ResponsiveWidget.isLargeScreen(context)
+                                  ? 3
+                                  : 2,
+                              color: _activeTab == 1
+                                  ? yellowColor
+                                  : Colors.transparent,
+                            ),
+                          )
+                        ],
                       ),
-                      child: Text('Recent posts'),
-                      color: buttonColor2,
                       onPressed: () {
-                        controller.animateToPage(0, duration: Duration(seconds: 1), curve: Curves.easeIn);
+                        setState(() {
+                          _activeTab = 1;
+                        });
+                        controller.animateToPage(0,
+                            duration: Duration(seconds: 1),
+                            curve: Curves.easeIn);
                       },
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, right: 16),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
                   child: HandCursor(
-                    child: MaterialButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                    child: FlatButton(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            'Stories',
+                            style: TextStyle(
+                              fontSize: ResponsiveWidget.isLargeScreen(context)
+                                  ? 22
+                                  : 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Container(
+                            height: 10,
+                            width: ResponsiveWidget.isLargeScreen(context)
+                                ? 50
+                                : 30,
+                            child: Divider(
+                              thickness: ResponsiveWidget.isLargeScreen(context)
+                                  ? 3
+                                  : 2,
+                              color: _activeTab == 2
+                                  ? yellowColor
+                                  : Colors.transparent,
+                            ),
+                          )
+                        ],
                       ),
-                      child: Text('About Us'),
-                      color: buttonColor2,
                       onPressed: () {
-                        controller.animateToPage(1, duration: Duration(seconds: 1), curve: Curves.easeIn);
+                        setState(() {
+                          _activeTab = 2;
+                        });
+                        controller.animateToPage(1,
+                            duration: Duration(seconds: 1),
+                            curve: Curves.easeIn);
                       },
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, right: 16),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
                   child: HandCursor(
-                    child: MaterialButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                    child: FlatButton(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            'About Us',
+                            style: TextStyle(
+                              fontSize: ResponsiveWidget.isLargeScreen(context)
+                                  ? 22
+                                  : 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Container(
+                            height: 10,
+                            width: ResponsiveWidget.isLargeScreen(context)
+                                ? 50
+                                : 30,
+                            child: Divider(
+                              thickness: ResponsiveWidget.isLargeScreen(context)
+                                  ? 3
+                                  : 2,
+                              color: _activeTab == 3
+                                  ? yellowColor
+                                  : Colors.transparent,
+                            ),
+                          )
+                        ],
                       ),
-                      child: Text('Submit a post!'),
-                      color: buttonColor1,
                       onPressed: () {
-                        controller.animateToPage(2, duration: Duration(seconds: 1), curve: Curves.easeIn);
+                        setState(() {
+                          _activeTab = 3;
+                        });
+                        controller.animateToPage(1,
+                            duration: Duration(seconds: 1),
+                            curve: Curves.easeIn);
+                      },
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 8.0,
+                    bottom: 8,
+                    left: 16,
+                    right: 32,
+                  ),
+                  child: HandCursor(
+                    child: FlatButton(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            'Contact Us',
+                            style: TextStyle(
+                              fontSize: ResponsiveWidget.isLargeScreen(context)
+                                  ? 22
+                                  : 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Container(
+                            height: 10,
+                            width: ResponsiveWidget.isLargeScreen(context)
+                                ? 50
+                                : 30,
+                            child: Divider(
+                              thickness: ResponsiveWidget.isLargeScreen(context)
+                                  ? 3
+                                  : 2,
+                              color: _activeTab == 4
+                                  ? yellowColor
+                                  : Colors.transparent,
+                            ),
+                          )
+                        ],
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _activeTab = 4;
+                        });
+                        controller.animateToPage(1,
+                            duration: Duration(seconds: 1),
+                            curve: Curves.easeIn);
                       },
                     ),
                   ),
@@ -186,14 +349,16 @@ class _LandingPageState extends State<LandingPage> {
                   ListTile(
                     title: Text('Recent Posts'),
                     onTap: () {
-                      controller.animateToPage(0, duration: Duration(seconds: 1), curve: Curves.easeIn);
+                      controller.animateToPage(0,
+                          duration: Duration(seconds: 1), curve: Curves.easeIn);
                       Navigator.pop(context);
                     },
                   ),
                   ListTile(
                     title: Text('About Us'),
                     onTap: () {
-                      controller.animateToPage(1, duration: Duration(seconds: 1), curve: Curves.easeIn);
+                      controller.animateToPage(1,
+                          duration: Duration(seconds: 1), curve: Curves.easeIn);
                       Navigator.pop(context);
                     },
                   ),
@@ -202,7 +367,8 @@ class _LandingPageState extends State<LandingPage> {
                     onTap: () {
                       print('working');
 
-                      controller.animateToPage(2, duration: Duration(seconds: 1), curve: Curves.easeIn);
+                      controller.animateToPage(2,
+                          duration: Duration(seconds: 1), curve: Curves.easeIn);
                       Navigator.pop(context);
                     },
                   ),
@@ -221,21 +387,25 @@ class _LandingPageState extends State<LandingPage> {
         scrollDirection: Axis.vertical,
         children: _pages,
       ),
-      floatingActionButton: (ResponsiveWidget.isSmallScreen(context) && (currentPage == 0))
-          ? Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: MaterialButton(
-                  color: buttonColor1,
-                  elevation: 10,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Icon(Icons.keyboard_arrow_down, size: 30, color: Colors.black),
-                  onPressed: () {
-                    controller.animateToPage(1, duration: Duration(seconds: 1), curve: Curves.easeIn);
-                  }),
-            )
-          : null,
+      floatingActionButton:
+          (ResponsiveWidget.isSmallScreen(context) && (currentPage == 0))
+              ? Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: MaterialButton(
+                      color: buttonColor1,
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Icon(Icons.keyboard_arrow_down,
+                          size: 30, color: Colors.black),
+                      onPressed: () {
+                        controller.animateToPage(1,
+                            duration: Duration(seconds: 1),
+                            curve: Curves.easeIn);
+                      }),
+                )
+              : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
