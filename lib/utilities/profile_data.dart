@@ -36,7 +36,7 @@ List<Widget> profilesSmallScreen = [
     name: 'Drashti',
     imagesrc: 'profile/drashti.jpg',
     caption:
-        "Huesofthemind has inspired and motivated me to become a better person with each passing day.",
+        "Living in a million alternate realities rather than this reality, I guess that's why I have hope every time I wake up",
   ),
   //Kinnari
   smallProfileCard(
@@ -100,7 +100,7 @@ List<Widget> profilesNormal = [
     name: 'Drashti',
     imagesrc: 'profile/drashti.jpg',
     caption:
-        "Huesofthemind has inspired and motivated me to become a better person with each passing day.",
+        "Living in a million alternate realities rather than this reality, I guess that's why I have hope every time I wake up",
   ),
   //Kinnari
   profileCard(

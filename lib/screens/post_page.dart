@@ -126,7 +126,7 @@ class _PostPageState extends State<PostPage> {
                                 ),
                                 onPressed: () {
                                   html.window.open(
-                                      'https://www.instagram.com/huesofthemind/',
+                                      'https://docs.google.com/forms/d/e/1FAIpQLSdSdZpFd4Re9tdOH0rHrYZFk1pW5P3yjqkooEg7dPLx4RrQEw/viewform',
                                       'Post Link');
                                 },
                                 child: Text(
