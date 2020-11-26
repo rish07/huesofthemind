@@ -1,18 +1,19 @@
 import 'dart:async';
-import 'dart:convert';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
-
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase/firebase.dart' as fb;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
+import 'package:hues/utilities/constants.dart';
 import 'package:hues/utilities/hand_cursor.dart';
 import 'package:hues/utilities/responsive_widget.dart';
-import 'package:hues/widgets/custom_button.dart';
+import 'dart:convert';
+import 'package:auto_size_text/auto_size_text.dart';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:firebase/firebase.dart' as fb;
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:universal_html/html.dart' as html;
 
@@ -39,10 +40,8 @@ class _SubmitPostState extends State<SubmitPost> {
   TextEditingController _writeController = TextEditingController();
 
   Future<void> uploadImageFile(html.File image, {String imageName}) async {
-    fb.StorageReference storageRef =
-        fb.storage().ref('images/${imageName ?? DateTime.now()}');
-    fb.UploadTaskSnapshot uploadTaskSnapshot =
-        await storageRef.put(image).future;
+    fb.StorageReference storageRef = fb.storage().ref('images/${imageName ?? DateTime.now()}');
+    fb.UploadTaskSnapshot uploadTaskSnapshot = await storageRef.put(image).future;
 
     Uri imageUri = await uploadTaskSnapshot.ref.getDownloadURL();
     setState(() {
@@ -84,30 +83,20 @@ class _SubmitPostState extends State<SubmitPost> {
     var response = await http.post('https://api.sendgrid.com/v3/mail/send ',
         headers: {
           "content-type": "application/json",
-          "authorization":
-              "Bearer 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",
+          "authorization": "Bearer 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",
         },
         body: json.encode(
           {
             "personalizations": [
               {
                 "to": [
-                  {
-                    "email": "rishirajsinghchhabra@gmail.com",
-                    "name": "Rishi Raj Singh"
-                  }
+                  {"email": "rishirajsinghchhabra@gmail.com", "name": "Rishi Raj Singh"}
                 ],
                 "subject": "Hello, World!"
               }
             ],
-            "from": {
-              "email": "huesofthemind@gmail.com",
-              "name": "Huesofthemind"
-            },
-            "reply_to": {
-              "email": "huesofthemind@gmail.com",
-              "name": "Huesofthemind"
-            },
+            "from": {"email": "huesofthemind@gmail.com", "name": "Huesofthemind"},
+            "reply_to": {"email": "huesofthemind@gmail.com", "name": "Huesofthemind"},
             "content": [
               {"type": "text/plain", "value": "Mail content"},
             ],
@@ -128,6 +117,7 @@ class _SubmitPostState extends State<SubmitPost> {
       child: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
+        color: appBarBg,
         child: Form(
           key: _formKey,
           autovalidate: true,
@@ -136,9 +126,7 @@ class _SubmitPostState extends State<SubmitPost> {
               height: MediaQuery.of(context).size.height * 0.7,
               width: ResponsiveWidget.isLargeScreen(context)
                   ? MediaQuery.of(context).size.width * 0.25
-                  : ResponsiveWidget.isMediumScreen(context)
-                      ? MediaQuery.of(context).size.width * 0.4
-                      : MediaQuery.of(context).size.width * 0.7,
+                  : ResponsiveWidget.isMediumScreen(context) ? MediaQuery.of(context).size.width * 0.4 : MediaQuery.of(context).size.width * 0.7,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -146,8 +134,7 @@ class _SubmitPostState extends State<SubmitPost> {
                   children: [
                     Text(
                       'Please fill in the details:',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.05,
@@ -162,23 +149,17 @@ class _SubmitPostState extends State<SubmitPost> {
                         decoration: InputDecoration(
                           hintText: 'Name',
                           hintStyle: TextStyle(color: Colors.grey),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20.0),
+                          contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                           border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8.0)),
+                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 1.0),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8.0)),
+                            borderSide: BorderSide(color: Colors.black, width: 1.0),
+                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 2.0),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8.0)),
+                            borderSide: BorderSide(color: Colors.black, width: 2.0),
+                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
                           ),
                         ),
                       ),
@@ -195,23 +176,17 @@ class _SubmitPostState extends State<SubmitPost> {
                         decoration: InputDecoration(
                           hintText: 'Instagram Username',
                           hintStyle: TextStyle(color: Colors.grey),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20.0),
+                          contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                           border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8.0)),
+                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 1.0),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8.0)),
+                            borderSide: BorderSide(color: Colors.black, width: 1.0),
+                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 2.0),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8.0)),
+                            borderSide: BorderSide(color: Colors.black, width: 2.0),
+                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
                           ),
                         ),
                       ),
@@ -231,29 +206,22 @@ class _SubmitPostState extends State<SubmitPost> {
                           }
                           return null;
                         },
-                        maxLines:
-                            ResponsiveWidget.isSmallScreen(context) ? 4 : 10,
+                        maxLines: ResponsiveWidget.isSmallScreen(context) ? 4 : 10,
                         textCapitalization: TextCapitalization.words,
                         decoration: InputDecoration(
                           hintText: 'Write up',
                           hintStyle: TextStyle(color: Colors.grey),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20.0),
+                          contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                           border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8.0)),
+                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 1.0),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8.0)),
+                            borderSide: BorderSide(color: Colors.black, width: 1.0),
+                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 2.0),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8.0)),
+                            borderSide: BorderSide(color: Colors.black, width: 2.0),
+                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
                           ),
                         ),
                       ),
@@ -289,44 +257,56 @@ class _SubmitPostState extends State<SubmitPost> {
                     SizedBox(
                       height: 30,
                     ),
-                    customButton(
-                      title: 'Submit',
-                      onPressed: () async {
-                        setState(() {
-                          isUploading = true;
-                        });
-                        await uploadImageFile(imageFile, imageName: userName);
-                        // await postDbRef.add({
-                        //   'name': userName,
-                        //   'insta': userInsta,
-                        //   'writeUp': writeUp,
-                        //   'imageUrl': imageUrl,
-                        // });
-                        await sendEmail();
-                        if (_formKey.currentState.validate() && imageExists) {
-                          _writeController.clear();
-                          _instaController.clear();
-                          _nameController.clear();
-                          setState(() {
-                            isUploading = false;
-                            imageExists = false;
-                            imageFile = null;
-                          });
+                    Flexible(
+                      child: HandCursor(
+                        child: MaterialButton(
+                          minWidth: 200,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Text(
+                            'Submit',
+                            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                          ),
+                          color: Colors.black,
+                          onPressed: () async {
+                            setState(() {
+                              isUploading = true;
+                            });
+                            await uploadImageFile(imageFile, imageName: userName);
+                            // await postDbRef.add({
+                            //   'name': userName,
+                            //   'insta': userInsta,
+                            //   'writeUp': writeUp,
+                            //   'imageUrl': imageUrl,
+                            // });
+                            await sendEmail();
+                            if (_formKey.currentState.validate() && imageExists) {
+                              _writeController.clear();
+                              _instaController.clear();
+                              _nameController.clear();
+                              setState(() {
+                                isUploading = false;
+                                imageExists = false;
+                                imageFile = null;
+                              });
 
-                          Scaffold.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Submitted Successfully!'),
-                            ),
-                          );
-                        } else if (imageExists == false) {
-                          Scaffold.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Please upload an Image!'),
-                            ),
-                          );
-                        }
-                      },
-                    ),
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Submitted Successfully!'),
+                                ),
+                              );
+                            } else if (imageExists == false) {
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Please upload an Image!'),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
