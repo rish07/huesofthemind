@@ -1,19 +1,13 @@
 import 'dart:async';
-
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:hues/widgets/postCard.dart';
-import 'package:http/http.dart' as http;
-import 'package:hues/utilities/constants.dart';
-import 'package:hues/utilities/hand_cursor.dart';
-
-import 'package:hues/utilities/responsive_widget.dart';
-import 'dart:convert';
-import 'package:hues/utilities/reusable_card.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
+
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hues/utilities/constants.dart';
+import 'package:hues/utilities/responsive_widget.dart';
 
 class PostPage extends StatefulWidget {
   @override
@@ -46,9 +40,9 @@ class _PostPageState extends State<PostPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return loading
         ? Container(
-            decoration: BoxDecoration(color: appBarBg),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -71,14 +65,85 @@ class _PostPageState extends State<PostPage> {
             height: ResponsiveWidget.isSmallScreen(context)
                 ? MediaQuery.of(context).size.height * 0.9
                 : MediaQuery.of(context).size.height,
-            color: appBarBg,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: !ResponsiveWidget.isSmallScreen(context)
-                  ? ListView(
-                      shrinkWrap: true,
-                      controller: _controller,
+                  ? Column(
                       children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            right: 8.0,
+                            bottom: 10,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    height: 26,
+                                    width: 20,
+                                    child: VerticalDivider(
+                                      width: 2,
+                                      thickness: 4,
+                                      color: yellowColor,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Stories by the ',
+                                    style: TextStyle(
+                                      fontSize: ResponsiveWidget.isLargeScreen(
+                                              context)
+                                          ? 22
+                                          : 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'people',
+                                    style: TextStyle(
+                                      color: yellowColor,
+                                      fontSize: ResponsiveWidget.isLargeScreen(
+                                              context)
+                                          ? 22
+                                          : 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              RaisedButton(
+                                color: Colors.white,
+                                hoverColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                  color: yellowColor,
+                                  width: 3,
+                                )),
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 18,
+                                  horizontal: 32,
+                                ),
+                                onPressed: () {
+                                  html.window.open(
+                                      'https://docs.google.com/forms/d/e/1FAIpQLSdSdZpFd4Re9tdOH0rHrYZFk1pW5P3yjqkooEg7dPLx4RrQEw/viewform',
+                                      'Post Link');
+                                },
+                                child: Text(
+                                  'Want to share your story?',
+                                  style: TextStyle(
+                                    fontSize:
+                                        ResponsiveWidget.isLargeScreen(context)
+                                            ? 18
+                                            : 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                         Row(
                             children: ResponsiveWidget.isLargeScreen(context)
                                 ? cardsTopLarge

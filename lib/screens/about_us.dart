@@ -1,9 +1,11 @@
+import 'dart:html' as html;
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import '../utilities/responsive_widget.dart';
+import 'package:hues/utilities/constants.dart';
 
 import '../utilities/profile_data.dart';
+import '../utilities/responsive_widget.dart';
 
 class AboutUs extends StatefulWidget {
   @override
@@ -18,141 +20,149 @@ class _AboutUsState extends State<AboutUs> {
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      color: Color(0xFFFAF3EA),
       child: Padding(
-        padding: const EdgeInsets.only(top: 30.0, left: 16, right: 16),
+        padding: const EdgeInsets.only(left: 16, right: 16),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  RaisedButton(
+                    color: Colors.white,
+                    hoverColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                      color: yellowColor,
+                      width: 3,
+                    )),
+                    padding: EdgeInsets.symmetric(
+                      vertical: 16,
+                      horizontal: 32,
+                    ),
+                    onPressed: () {
+                      html.window.open(
+                          'https://www.instagram.com/huesofthemind/',
+                          'Post Link');
+                    },
+                    child: Text(
+                      'View More Posts',
+                      style: TextStyle(
+                        fontSize:
+                            ResponsiveWidget.isLargeScreen(context) ? 18 : 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
+              children: [
                 Container(
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.all(8),
-                  height: 100,
-                  width: 100,
-                  child: Image.asset(
-                    'sunflower.png',
+                  height: 26,
+                  width: 20,
+                  child: VerticalDivider(
+                    width: 2,
+                    thickness: 4,
+                    color: yellowColor,
                   ),
                 ),
-                Flexible(
-                  child: Text(
-                    'Team Sahaara',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize:
-                          ResponsiveWidget.isSmallScreen(context) ? 30 : 40,
-                    ),
+                Text(
+                  'Meet the Team ',
+                  style: TextStyle(
+                    fontSize: ResponsiveWidget.isLargeScreen(context) ? 24 : 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  'Sahaara',
+                  style: TextStyle(
+                    color: yellowColor,
+                    fontSize: ResponsiveWidget.isLargeScreen(context) ? 24 : 16,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Text(
+              'We are here to help each other by sharing, learning, coping, and healing together. Here\'s to that!',
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: ResponsiveWidget.isLargeScreen(context) ? 24 : 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Column(
               children: [
                 Container(
                   margin: ResponsiveWidget.isSmallScreen(context)
                       ? null
-                      : EdgeInsets.only(right: 20),
+                      : EdgeInsets.only(top: 30),
                   height: ResponsiveWidget.isSmallScreen(context)
-                      ? null
-                      : MediaQuery.of(context).size.height * 0.5,
+                      ? MediaQuery.of(context).size.height * 0.7
+                      : ResponsiveWidget.isLargeScreen(context)
+                          ? MediaQuery.of(context).size.height * 0.32
+                          : MediaQuery.of(context).size.height * 0.4,
                   width: ResponsiveWidget.isSmallScreen(context)
-                      ? null
-                      : MediaQuery.of(context).size.width * 0.2,
-                  child: ResponsiveWidget.isSmallScreen(context)
-                      ? null
-                      : Image.asset(
-                          'lily.png',
-                          fit: BoxFit.contain,
-                        ),
-                ),
-                Column(
-                  children: [
-                    Container(
-                      margin: ResponsiveWidget.isSmallScreen(context)
-                          ? null
-                          : EdgeInsets.only(top: 30),
-                      height: ResponsiveWidget.isSmallScreen(context)
-                          ? MediaQuery.of(context).size.height * 0.7
-                          : MediaQuery.of(context).size.height * 0.5,
-                      width: ResponsiveWidget.isSmallScreen(context)
-                          ? MediaQuery.of(context).size.width * 0.8
-                          : MediaQuery.of(context).size.width * 0.5,
-                      child: CarouselSlider(
-                        items: !ResponsiveWidget.isLargeScreen(context)
-                            ? profilesSmallScreen
-                            : profilesNormal,
-                        options: CarouselOptions(
-                          autoPlayInterval: Duration(seconds: 5),
-                          autoPlayCurve: Curves.easeIn,
-                          autoPlay: true,
-                          onPageChanged: (index, reason) {
-                            setState(() {
-                              _current = index;
-                            });
-                          },
-                          aspectRatio: 1,
-                          enlargeCenterPage: true,
-                          enableInfiniteScroll: true,
-                          initialPage: 0,
-                        ),
-                      ),
+                      ? MediaQuery.of(context).size.width * 0.8
+                      : MediaQuery.of(context).size.width * 0.5,
+                  child: CarouselSlider(
+                    items: !ResponsiveWidget.isLargeScreen(context)
+                        ? profilesSmallScreen
+                        : profilesNormal,
+                    options: CarouselOptions(
+                      autoPlayInterval: Duration(seconds: 5),
+                      autoPlayCurve: Curves.easeIn,
+                      autoPlay: true,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          _current = index;
+                        });
+                      },
+                      aspectRatio: 1,
+                      enlargeCenterPage: true,
+                      enableInfiniteScroll: true,
+                      initialPage: 0,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: ResponsiveWidget.isSmallScreen(context)
-                          ? profilesSmallScreen.map((url) {
-                              int index = profilesSmallScreen.indexOf(url);
-                              return Container(
-                                width: 8.0,
-                                height: 8.0,
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 5, horizontal: 10),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: _current == index
-                                      ? Color.fromRGBO(0, 0, 0, 0.9)
-                                      : Color.fromRGBO(0, 0, 0, 0.4),
-                                ),
-                              );
-                            }).toList()
-                          : profilesNormal.map((url) {
-                              int index = profilesNormal.indexOf(url);
-                              return Container(
-                                width: 8.0,
-                                height: 8.0,
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 20),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: _current == index
-                                      ? Color.fromRGBO(0, 0, 0, 0.9)
-                                      : Color.fromRGBO(0, 0, 0, 0.4),
-                                ),
-                              );
-                            }).toList(),
-                    ),
-                  ],
+                  ),
                 ),
-                Container(
-                  margin: ResponsiveWidget.isSmallScreen(context)
-                      ? null
-                      : EdgeInsets.symmetric(horizontal: 20),
-                  height: ResponsiveWidget.isSmallScreen(context)
-                      ? null
-                      : MediaQuery.of(context).size.height * 0.5,
-                  width: ResponsiveWidget.isSmallScreen(context)
-                      ? null
-                      : MediaQuery.of(context).size.width * 0.2,
-                  child: ResponsiveWidget.isSmallScreen(context)
-                      ? null
-                      : Image.asset(
-                          'tulip.png',
-                          fit: BoxFit.contain,
-                        ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: ResponsiveWidget.isSmallScreen(context)
+                      ? profilesSmallScreen.map((url) {
+                          int index = profilesSmallScreen.indexOf(url);
+                          return Container(
+                            width: 8.0,
+                            height: 8.0,
+                            margin: EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 10),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: _current == index
+                                  ? Color.fromRGBO(0, 0, 0, 0.9)
+                                  : Color.fromRGBO(0, 0, 0, 0.4),
+                            ),
+                          );
+                        }).toList()
+                      : profilesNormal.map((url) {
+                          int index = profilesNormal.indexOf(url);
+                          return Container(
+                            width: 8.0,
+                            height: 8.0,
+                            margin: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 20),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: _current == index
+                                  ? Color.fromRGBO(0, 0, 0, 0.9)
+                                  : Color.fromRGBO(0, 0, 0, 0.4),
+                            ),
+                          );
+                        }).toList(),
                 ),
               ],
             ),
