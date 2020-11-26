@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -333,52 +334,129 @@ class _LandingPageState extends State<LandingPage> {
                   ),
                 ],
               ),
-              backgroundColor: appBarBg,
+              backgroundColor: Colors.transparent,
               actions: <Widget>[Padding(padding: EdgeInsets.all(8))],
             ),
       drawer: ResponsiveWidget.isSmallScreen(context)
           ? Drawer(
-              child: ListView(
-                children: [
-                  DrawerHeader(
-                    child: null,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      backgroundBlendMode: BlendMode.dstATop,
-                      image: DecorationImage(
-                        image: AssetImage('drawer.jpg'),
-                      ),
+              child: Container(
+                color: yellowColor,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 40,
+                          backgroundImage: AssetImage(
+                            'logo.png',
+                          ),
+                          backgroundColor: Colors.transparent,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'huesofthemind',
+                          style: TextStyle(
+                            fontFamily: 'Caveat',
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Divider(
+                          indent: 120,
+                          endIndent: 120,
+                          thickness: 3,
+                          color: Colors.white,
+                        ),
+                      ],
                     ),
-                    padding: EdgeInsets.zero,
-                    margin: EdgeInsets.zero,
-                  ),
-                  ListTile(
-                    title: Text('Recent Posts'),
-                    onTap: () {
-                      controller.animateToPage(0,
-                          duration: Duration(seconds: 1), curve: Curves.easeIn);
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text('About Us'),
-                    onTap: () {
-                      controller.animateToPage(1,
-                          duration: Duration(seconds: 1), curve: Curves.easeIn);
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text('Submit a post'),
-                    onTap: () {
-                      print('working');
-
-                      controller.animateToPage(2,
-                          duration: Duration(seconds: 1), curve: Curves.easeIn);
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
+                    Column(
+                      children: [
+                        Column(
+                          children: [
+                            DrawerOption(
+                              controller: controller,
+                              pageNumber: 0,
+                              title: 'Recent Events',
+                            ),
+                            DrawerOption(
+                              controller: controller,
+                              pageNumber: 1,
+                              title: 'Stories',
+                            ),
+                            DrawerOption(
+                              controller: controller,
+                              pageNumber: 2,
+                              title: 'About us',
+                            ),
+                            DrawerOption(
+                              controller: controller,
+                              pageNumber: 5,
+                              title: 'Contact Us',
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 80,
+                        ),
+                        Divider(
+                          indent: 120,
+                          endIndent: 120,
+                          thickness: 3,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            html.window.open(
+                                'https://www.instagram.com/huesofthemind/',
+                                'Post Link');
+                          },
+                          child: Container(
+                            margin: EdgeInsets.all(10),
+                            height: 20,
+                            width: 20,
+                            child: Image.asset('insta.png'),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            html.window.open(
+                                'https://twitter.com/huesofthemind',
+                                'Post Link');
+                          },
+                          child: Container(
+                            margin: EdgeInsets.all(10),
+                            height: 20,
+                            width: 20,
+                            child: Image.asset('twitter.png'),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            html.window.open(
+                                'mailto:huesofthemind@gmail.com', 'Post Link');
+                          },
+                          child: Container(
+                            margin: EdgeInsets.all(10),
+                            height: 30,
+                            width: 30,
+                            child: Icon(Icons.email),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             )
           : null,
@@ -394,7 +472,7 @@ class _LandingPageState extends State<LandingPage> {
         children: _pages,
       ),
       floatingActionButton:
-          (ResponsiveWidget.isSmallScreen(context) && (currentPage == 0))
+          (ResponsiveWidget.isSmallScreen(context) && (currentPage == 1))
               ? Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: MaterialButton(
@@ -406,13 +484,54 @@ class _LandingPageState extends State<LandingPage> {
                       child: Icon(Icons.keyboard_arrow_down,
                           size: 30, color: Colors.black),
                       onPressed: () {
-                        controller.animateToPage(1,
+                        controller.animateToPage(2,
                             duration: Duration(seconds: 1),
                             curve: Curves.easeIn);
                       }),
                 )
               : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
+}
+
+class DrawerOption extends StatelessWidget {
+  const DrawerOption({
+    Key key,
+    @required this.controller,
+    this.title,
+    this.pageNumber,
+  }) : super(key: key);
+
+  final PageController controller;
+  final String title;
+  final int pageNumber;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        controller.animateToPage(pageNumber,
+            duration: Duration(seconds: 1), curve: Curves.easeIn);
+        Navigator.pop(context);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 8.0,
+          vertical: 15,
+        ),
+        child: Container(
+          child: Text(
+            title,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: pageNumber == 0 ? Colors.white : Colors.black,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

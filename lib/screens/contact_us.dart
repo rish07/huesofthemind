@@ -64,8 +64,8 @@ class _ContactUsState extends State<ContactUs> {
                             child: Image.asset(
                               'insta.png',
                               scale: ResponsiveWidget.isMediumScreen(context)
-                                  ? 5
-                                  : 3,
+                                  ? 25
+                                  : 15,
                             ),
                           ),
                           SizedBox(

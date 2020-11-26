@@ -124,8 +124,8 @@ Card profileCard({String name, String imagesrc, String caption}) {
                     GestureDetector(
                       onTap: () {},
                       child: Container(
-                        height: 50,
-                        width: 50,
+                        height: 35,
+                        width: 35,
                         child: Image.asset('insta.png'),
                       ),
                     ),
@@ -193,8 +193,8 @@ Card smallProfileCard({String name, String imagesrc, String caption}) {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  height: 40,
-                  width: 40,
+                  height: 30,
+                  width: 30,
                   child: Image.asset('insta.png'),
                 ),
               ),
