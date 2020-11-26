@@ -2,7 +2,6 @@ import 'dart:html' as html;
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:hues/utilities/constants.dart';
 
 import '../utilities/profile_data.dart';
@@ -105,7 +104,9 @@ class _AboutUsState extends State<AboutUs> {
                       : EdgeInsets.only(top: 30),
                   height: ResponsiveWidget.isSmallScreen(context)
                       ? MediaQuery.of(context).size.height * 0.7
-                      : MediaQuery.of(context).size.height * 0.32,
+                      : ResponsiveWidget.isLargeScreen(context)
+                          ? MediaQuery.of(context).size.height * 0.32
+                          : MediaQuery.of(context).size.height * 0.4,
                   width: ResponsiveWidget.isSmallScreen(context)
                       ? MediaQuery.of(context).size.width * 0.8
                       : MediaQuery.of(context).size.width * 0.5,
