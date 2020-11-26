@@ -10,9 +10,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
-import 'package:hues/utilities/constants.dart';
 import 'package:hues/utilities/hand_cursor.dart';
 import 'package:hues/utilities/responsive_widget.dart';
+import 'package:hues/widgets/custom_button.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:universal_html/html.dart' as html;
 
@@ -289,60 +289,44 @@ class _SubmitPostState extends State<SubmitPost> {
                     SizedBox(
                       height: 30,
                     ),
-                    Flexible(
-                      child: HandCursor(
-                        child: MaterialButton(
-                          minWidth: 200,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: Text(
-                            'Submit',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black),
-                          ),
-                          color: yellowColor,
-                          onPressed: () async {
-                            setState(() {
-                              isUploading = true;
-                            });
-                            await uploadImageFile(imageFile,
-                                imageName: userName);
-                            // await postDbRef.add({
-                            //   'name': userName,
-                            //   'insta': userInsta,
-                            //   'writeUp': writeUp,
-                            //   'imageUrl': imageUrl,
-                            // });
-                            await sendEmail();
-                            if (_formKey.currentState.validate() &&
-                                imageExists) {
-                              _writeController.clear();
-                              _instaController.clear();
-                              _nameController.clear();
-                              setState(() {
-                                isUploading = false;
-                                imageExists = false;
-                                imageFile = null;
-                              });
+                    customButton(
+                      title: 'Submit',
+                      onPressed: () async {
+                        setState(() {
+                          isUploading = true;
+                        });
+                        await uploadImageFile(imageFile, imageName: userName);
+                        // await postDbRef.add({
+                        //   'name': userName,
+                        //   'insta': userInsta,
+                        //   'writeUp': writeUp,
+                        //   'imageUrl': imageUrl,
+                        // });
+                        await sendEmail();
+                        if (_formKey.currentState.validate() && imageExists) {
+                          _writeController.clear();
+                          _instaController.clear();
+                          _nameController.clear();
+                          setState(() {
+                            isUploading = false;
+                            imageExists = false;
+                            imageFile = null;
+                          });
 
-                              Scaffold.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text('Submitted Successfully!'),
-                                ),
-                              );
-                            } else if (imageExists == false) {
-                              Scaffold.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text('Please upload an Image!'),
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                      ),
-                    )
+                          Scaffold.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Submitted Successfully!'),
+                            ),
+                          );
+                        } else if (imageExists == false) {
+                          Scaffold.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Please upload an Image!'),
+                            ),
+                          );
+                        }
+                      },
+                    ),
                   ],
                 ),
               ),

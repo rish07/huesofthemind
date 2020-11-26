@@ -73,7 +73,7 @@ class _AboutUsState extends State<AboutUs> {
                   ),
                 ),
                 Text(
-                  'Meet the Team  ',
+                  'Meet the Team ',
                   style: TextStyle(
                     fontSize: ResponsiveWidget.isLargeScreen(context) ? 24 : 16,
                     fontWeight: FontWeight.bold,

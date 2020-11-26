@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:hues/screens/about_us.dart';
+import 'package:hues/screens/outreach.dart';
 import 'package:hues/screens/post_page.dart';
 import 'package:hues/screens/submit_post.dart';
 import 'package:hues/utilities/hand_cursor.dart';
@@ -29,6 +30,7 @@ class _LandingPageState extends State<LandingPage> {
     PostPage(),
     AboutUs(),
     SubmitPost(),
+    Outreach(),
   ];
 
   String temp;
