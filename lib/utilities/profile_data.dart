@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'constants.dart';
 
 const String randomCaption =
     "'This is a random caption to check how it looks. I never thought writing a random caption would be this hard. I cant even think what to write'";
@@ -13,13 +13,6 @@ List<Widget> profilesSmallScreen = [
       imagesrc: 'profile/manasi.jpg',
       caption:
           "Huesofthemind is a safe space, a place to empower each other. I founded this organisation a year ago and I couldn’t be more proud of all that we as a team have achieved and provided to the society. To lots of more positivity, understanding and joy!"),
-  //Lavanya
-  smallProfileCard(
-    name: 'Lavanya',
-    imagesrc: 'profile/lava.JPG',
-    caption:
-        "This page means a lot to me. It has become my coping mechanism and always lets the ray of positivity in me. I don't know what else to say. It just means a lot to me",
-  ),
 
   //Rishi
   smallProfileCard(
@@ -31,16 +24,10 @@ List<Widget> profilesSmallScreen = [
 
   //Shrey
   smallProfileCard(
-    name: 'Shrey',
-    imagesrc: randomCat,
+    name: 'Drashti',
+    imagesrc: 'profile/drashti.jpg',
     caption:
-        "Huesofthemind has inspired and motivated me to become a better person with each passing day.",
-  ),
-  //Kinnari
-  smallProfileCard(
-    name: 'Kinnari',
-    imagesrc: 'profile/kin.JPG',
-    caption: "Let's help each other grow, one day at a time :)",
+        "Living in a million alternate realities rather than this reality, I guess that's why I have hope every time I wake up",
   ),
 
   //Shristi
@@ -64,12 +51,6 @@ List<Widget> profilesSmallScreen = [
     caption:
         "Huesofthemind is a place for me to  do more than just design, it lets me spread happiness! I love the warm and positive vibe of our team because it matches my own. 😄",
   ),
-
-  //Nomit
-  smallProfileCard(
-      name: 'Nomit',
-      imagesrc: 'profile/nomit.jpg',
-      caption: "Exploring ourselves and spreading courage along the way 🤸‍♂️")
 ];
 
 List<Widget> profilesNormal = [
@@ -79,13 +60,7 @@ List<Widget> profilesNormal = [
       imagesrc: 'profile/manasi.jpg',
       caption:
           "Huesofthemind is a safe space, a place to empower each other. I founded this organisation a year ago and I couldn’t be more proud of all that we as a team have achieved and provided to the society. To lots of more positivity, understanding and joy!"),
-  //Lavanya
-  profileCard(
-    name: 'Lavanya',
-    imagesrc: 'profile/lava.JPG',
-    caption:
-        "This page means a lot to me. It has become my coping mechanism and always lets the ray of positivity in me. I don't know what else to say. It just means a lot to me",
-  ),
+
   //Rishi
   profileCard(
     name: 'Rishi',
@@ -93,19 +68,7 @@ List<Widget> profilesNormal = [
     caption:
         "I've always wanted to share what's going on in my mind without being judged. Huesofthemind is a similar platform, it's my #safeplace",
   ),
-  //Shrey
-  profileCard(
-    name: 'Shrey',
-    imagesrc: randomCat,
-    caption:
-        "Huesofthemind has inspired and motivated me to become a better person with each passing day.",
-  ),
-  //Kinnari
-  profileCard(
-    name: 'Kinnari',
-    imagesrc: 'profile/kin.JPG',
-    caption: "Let's help each other grow, one day at a time :)",
-  ),
+
   //Shristi
   profileCard(
       name: 'Shristi',
@@ -126,27 +89,20 @@ List<Widget> profilesNormal = [
     caption:
         "Huesofthemind is a place for me to  do more than just design, it lets me spread happiness! I love the warm and positive vibe of our team because it matches my own. 😄",
   ),
-  //Nomit
-  profileCard(
-      name: 'Nomit',
-      imagesrc: 'profile/nomit.jpg',
-      caption: "Exploring ourselves and spreading courage along the way 🤸‍♂️"),
 ];
 
 Card profileCard({String name, String imagesrc, String caption}) {
   return Card(
-    color: cardColor,
+    color: Colors.white,
     child: Row(
       children: <Widget>[
         Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              CircleAvatar(
-                backgroundImage: AssetImage(imagesrc),
-                radius: 70,
-              ),
-            ],
+          child: Container(
+            padding: EdgeInsets.all(8),
+            child: Image.asset(
+              imagesrc,
+              fit: BoxFit.fill,
+            ),
           ),
         ),
         Expanded(
@@ -154,19 +110,33 @@ Card profileCard({String name, String imagesrc, String caption}) {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                AutoSizeText(
-                  name,
-                  maxLines: 1,
-                  style: TextStyle(fontSize: 40),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AutoSizeText(
+                      name,
+                      maxLines: 1,
+                      style: TextStyle(fontSize: 40),
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        height: 35,
+                        width: 35,
+                        child: Image.asset('insta.png'),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 Text(
                   caption,
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.justify,
                   style: TextStyle(fontFamily: 'Satisfy', fontSize: 25),
                 ),
               ],
@@ -180,39 +150,55 @@ Card profileCard({String name, String imagesrc, String caption}) {
 
 Card smallProfileCard({String name, String imagesrc, String caption}) {
   return Card(
-    color: cardColor,
     child: Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 30.0),
-            child: CircleAvatar(
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: AssetImage(imagesrc),
+      child: Stack(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 30.0),
+                child: CircleAvatar(
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage: AssetImage(imagesrc),
+                  ),
+                  radius: 50,
+                ),
               ),
-              radius: 50,
-            ),
+              AutoSizeText(
+                name,
+                maxLines: 1,
+                style: TextStyle(fontSize: 30),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              AutoSizeText(
+                caption,
+                maxLines: 5,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: 'Satisfy',
+                  fontSize: 16,
+                ),
+              ),
+            ],
           ),
-          AutoSizeText(
-            name,
-            maxLines: 1,
-            style: TextStyle(fontSize: 30),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          AutoSizeText(
-            caption,
-            maxLines: 5,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'Satisfy',
-              fontSize: 16,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  height: 30,
+                  width: 30,
+                  child: Image.asset('insta.png'),
+                ),
+              ),
+            ],
           ),
         ],
       ),
