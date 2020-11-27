@@ -252,7 +252,7 @@ class _LandingPageState extends State<LandingPage> {
                         setState(() {
                           _activeTab = 3;
                         });
-                        controller.animateToPage(1,
+                        controller.animateToPage(2,
                             duration: Duration(seconds: 1),
                             curve: Curves.easeIn);
                       },
@@ -301,7 +301,7 @@ class _LandingPageState extends State<LandingPage> {
                         setState(() {
                           _activeTab = 4;
                         });
-                        controller.animateToPage(1,
+                        controller.animateToPage(5,
                             duration: Duration(seconds: 1),
                             curve: Curves.easeIn);
                       },
@@ -313,20 +313,26 @@ class _LandingPageState extends State<LandingPage> {
           : AppBar(
               elevation: 0,
               iconTheme: IconThemeData(color: Colors.black),
+              centerTitle: true,
               title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.1,
+                  // SizedBox(
+                  //   width: MediaQuery.of(context).size.width * 0.1,
+                  // ),
+                  CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    backgroundImage: AssetImage(
+                      'logo.png',
+                    ),
                   ),
-                  Image.asset(
-                    'logo.png',
-                    fit: BoxFit.contain,
-                    scale: 8,
+                  SizedBox(
+                    width: 5,
                   ),
                   Text(
                     'huesofthemind ',
                     style: TextStyle(
-                      fontSize: 35,
+                      fontSize: 28,
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Caveat',

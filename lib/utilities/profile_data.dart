@@ -12,7 +12,7 @@ List<Widget> profilesSmallScreen = [
       name: 'Manasi',
       imagesrc: 'profile/manasi.jpg',
       caption:
-          "Huesofthemind is a safe space, a place to empower each other. I founded this organisation a year ago and I couldn’t be more proud of all that we as a team have achieved and provided to the society. To lots of more positivity, understanding and joy!"),
+          "Huesofthemind is a safe space, a place to empower each other. I founded this organisation a year ago and I couldn’t be more proud of all that we as a team have achieved and provided to the society."),
 
   //Rishi
   smallProfileCard(
@@ -22,13 +22,19 @@ List<Widget> profilesSmallScreen = [
         "I've always wanted to share what's going on in my mind without being judged. Huesofthemind is a similar platform, it's my #safeplace",
   ),
 
-  //Shrey
+  //Drashti
   smallProfileCard(
     name: 'Drashti',
     imagesrc: 'profile/drashti.jpg',
     caption:
         "Living in a million alternate realities rather than this reality, I guess that's why I have hope every time I wake up",
   ),
+  //Pranavi
+  smallProfileCard(
+      name: 'Pranavi',
+      imagesrc: 'profile/pranavi.jpeg',
+      caption:
+          "Sky is an embodiment of everything from bright suns to Heavy rains. Huesofthemind, a sky-like safe space, is one of the guiding lights for me and a whole big community to learn together to learn about ourselves."),
 
   //Shristi
   smallProfileCard(
@@ -68,6 +74,19 @@ List<Widget> profilesNormal = [
     caption:
         "I've always wanted to share what's going on in my mind without being judged. Huesofthemind is a similar platform, it's my #safeplace",
   ),
+  //Drashti
+  profileCard(
+    name: 'Drashti',
+    imagesrc: 'profile/drashti.jpg',
+    caption:
+        "Living in a million alternate realities rather than this reality, I guess that's why I have hope every time I wake up",
+  ),
+  //Pranavi
+  profileCard(
+      name: 'Pranavi',
+      imagesrc: 'profile/pranavi.jpeg',
+      caption:
+          "Sky is an embodiment of everything from bright suns to Heavy rains. Huesofthemind, a sky-like safe space, is one of the guiding lights for me and a whole big community to learn together to learn about ourselves."),
 
   //Shristi
   profileCard(
@@ -98,7 +117,7 @@ Card profileCard({String name, String imagesrc, String caption}) {
       children: <Widget>[
         Expanded(
           child: Container(
-            padding: EdgeInsets.all(8),
+            padding: EdgeInsets.all(12),
             child: Image.asset(
               imagesrc,
               fit: BoxFit.fill,
@@ -106,7 +125,7 @@ Card profileCard({String name, String imagesrc, String caption}) {
           ),
         ),
         Expanded(
-          flex: 3,
+          flex: 2,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -170,19 +189,19 @@ Card smallProfileCard({String name, String imagesrc, String caption}) {
               AutoSizeText(
                 name,
                 maxLines: 1,
-                style: TextStyle(fontSize: 30),
+                style: TextStyle(fontSize: 25),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
-                height: 30,
+                height: 20,
               ),
               AutoSizeText(
                 caption,
-                maxLines: 5,
+                maxLines: 6,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'Satisfy',
-                  fontSize: 16,
+                  fontSize: 14,
                 ),
               ),
             ],
@@ -193,8 +212,8 @@ Card smallProfileCard({String name, String imagesrc, String caption}) {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  height: 30,
-                  width: 30,
+                  height: 27,
+                  width: 27,
                   child: Image.asset('insta.png'),
                 ),
               ),
