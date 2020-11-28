@@ -136,7 +136,7 @@ class _AboutUsState extends State<AboutUs> {
                         });
                       },
                       aspectRatio: 1,
-                      enlargeCenterPage: true,
+                      //enlargeCenterPage: true,
                       enableInfiniteScroll: true,
                       initialPage: 0,
                     ),

@@ -8,7 +8,6 @@ import 'package:hues/screens/contact_us.dart';
 import 'package:hues/screens/outreach.dart';
 import 'package:hues/screens/post_page.dart';
 import 'package:hues/screens/recent_events.dart';
-import 'package:hues/screens/submit_post.dart';
 import 'package:hues/utilities/hand_cursor.dart';
 import 'package:hues/widgets/postCard.dart';
 
@@ -33,7 +32,7 @@ class _LandingPageState extends State<LandingPage> {
     RecentEvents(),
     PostPage(),
     AboutUs(),
-    SubmitPost(),
+    //SubmitPost(),
     Outreach(),
     ContactUs(),
   ];
@@ -118,8 +117,12 @@ class _LandingPageState extends State<LandingPage> {
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Caveat'),
               ),
-              leading: CircleAvatar(
-                child: Image.asset('logo.png'),
+              leading: Padding(
+                padding: EdgeInsets.only(left: 8.0),
+                child: CircleAvatar(
+                  backgroundImage: AssetImage('logo.png'),
+                  backgroundColor: Colors.transparent,
+                ),
               ),
               elevation: 0,
               backgroundColor: Colors.transparent,
