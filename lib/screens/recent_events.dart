@@ -1,9 +1,12 @@
 import 'dart:html' as html;
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:hues/screens/about_events.dart';
 import 'package:hues/utilities/constants.dart';
 import 'package:hues/utilities/responsive_widget.dart';
 import 'package:hues/widgets/custom_button.dart';
+import 'package:page_transition/page_transition.dart';
 
 class RecentEvents extends StatefulWidget {
   @override
@@ -51,33 +54,94 @@ class _RecentEventsState extends State<RecentEvents> {
             ),
             Expanded(
               child: Container(
-                child: Row(
-                  children: [
-                    eventCard(
-                      context,
-                      imageAssetLink: 'empower.png',
-                      eventName: "Empower: Where Empathy is Your Power",
-                      readMore: 'https://empower-hotm.web.app/#/',
-                    ),
-                    eventCard(
-                      context,
-                      imageAssetLink: 'empower.png',
-                      eventName: "Empower: Where Empathy is Your Power",
-                      readMore: 'https://empower-hotm.web.app/#/',
-                    ),
-                    eventCard(
-                      context,
-                      imageAssetLink: 'empower.png',
-                      eventName: "Empower: Where Empathy is Your Power",
-                      readMore: 'https://empower-hotm.web.app/#/',
-                    ),
-                  ],
-                ),
+                child: !ResponsiveWidget.isSmallScreen(context)
+                    ? Row(
+                        children: [
+                          eventCard(
+                            context,
+                            imageAssetLink: 'empower.png',
+                            eventName: "Empower: Where Empathy is Your Power",
+                            readMore: 'https://empower-hotm.web.app/#/',
+                          ),
+                          eventCard(
+                            context,
+                            imageAssetLink: 'empower.png',
+                            eventName: "Empower: Where Empathy is Your Power",
+                            readMore: 'https://empower-hotm.web.app/#/',
+                          ),
+                          eventCard(
+                            context,
+                            imageAssetLink: 'empower.png',
+                            eventName: "Empower: Where Empathy is Your Power",
+                            readMore: 'https://empower-hotm.web.app/#/',
+                          ),
+                        ],
+                      )
+                    : CarouselSlider(
+                        items: [
+                          Flex(
+                            direction: Axis.vertical,
+                            children: [
+                              Container(
+                                child: eventCard(
+                                  context,
+                                  imageAssetLink: 'empower.png',
+                                  eventName:
+                                      "Empower: Where Empathy is Your Power",
+                                  readMore: 'https://empower-hotm.web.app/#/',
+                                ),
+                              ),
+                            ],
+                          ),
+                          Flex(
+                            direction: Axis.vertical,
+                            children: [
+                              Container(
+                                child: eventCard(
+                                  context,
+                                  imageAssetLink: 'empower.png',
+                                  eventName:
+                                      "Empower: Where Empathy is Your Power",
+                                  readMore: 'https://empower-hotm.web.app/#/',
+                                ),
+                              ),
+                            ],
+                          ),
+                          Flex(
+                            direction: Axis.vertical,
+                            children: [
+                              Container(
+                                child: eventCard(
+                                  context,
+                                  imageAssetLink: 'empower.png',
+                                  eventName:
+                                      "Empower: Where Empathy is Your Power",
+                                  readMore: 'https://empower-hotm.web.app/#/',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                        options: CarouselOptions(
+                          height: 400.0,
+                          aspectRatio: 16 / 9,
+                          viewportFraction: 0.8,
+                          initialPage: 0,
+                        ),
+                      ),
               ),
             ),
             customButton(
               title: 'Know More!',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  PageTransition(
+                    child: AboutEvents(),
+                    type: PageTransitionType.bottomToTop,
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -86,14 +150,18 @@ class _RecentEventsState extends State<RecentEvents> {
   }
 
   Expanded eventCard(BuildContext context,
-      {String eventName, String imageAssetLink, String readMore}) {
+      {String eventName,
+      String imageAssetLink,
+      String readMore,
+      bool isSmall = false}) {
     return Expanded(
       child: Container(
+        width: isSmall ? MediaQuery.of(context).size.width * 0.9 : null,
         padding: EdgeInsets.symmetric(
           horizontal: 10,
         ),
         child: Card(
-          elevation: 10,
+          elevation: isSmall ? 8 : 10,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -107,8 +175,7 @@ class _RecentEventsState extends State<RecentEvents> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize:
-                        ResponsiveWidget.isMediumScreen(context) ? 18 : 24,
+                    fontSize: ResponsiveWidget.isLargeScreen(context) ? 24 : 18,
                   ),
                 ),
               ),
@@ -125,18 +192,23 @@ class _RecentEventsState extends State<RecentEvents> {
                         color: yellowColor,
                         width: 3,
                       )),
-                      padding: EdgeInsets.symmetric(
-                        vertical: 16,
-                        horizontal: 32,
-                      ),
+                      padding: isSmall
+                          ? EdgeInsets.all(8)
+                          : EdgeInsets.symmetric(
+                              vertical: 16,
+                              horizontal: 32,
+                            ),
                       onPressed: () {
                         html.window.open(readMore, 'Post Link');
                       },
                       child: Text(
                         'Read More',
                         style: TextStyle(
-                          fontSize:
-                              ResponsiveWidget.isLargeScreen(context) ? 18 : 14,
+                          fontSize: isSmall
+                              ? 12
+                              : ResponsiveWidget.isLargeScreen(context)
+                                  ? 18
+                                  : 14,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),

@@ -38,10 +38,12 @@ class _AboutUsState extends State<AboutUs> {
                       color: yellowColor,
                       width: 3,
                     )),
-                    padding: EdgeInsets.symmetric(
-                      vertical: 16,
-                      horizontal: 32,
-                    ),
+                    padding: ResponsiveWidget.isSmallScreen(context)
+                        ? EdgeInsets.all(8)
+                        : EdgeInsets.symmetric(
+                            vertical: 16,
+                            horizontal: 32,
+                          ),
                     onPressed: () {
                       html.window.open(
                           'https://www.instagram.com/huesofthemind/',
@@ -50,8 +52,11 @@ class _AboutUsState extends State<AboutUs> {
                     child: Text(
                       'View More Posts',
                       style: TextStyle(
-                        fontSize:
-                            ResponsiveWidget.isLargeScreen(context) ? 18 : 14,
+                        fontSize: ResponsiveWidget.isLargeScreen(context)
+                            ? 18
+                            : ResponsiveWidget.isMediumScreen(context)
+                                ? 14
+                                : 12,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
@@ -88,12 +93,19 @@ class _AboutUsState extends State<AboutUs> {
                 ),
               ],
             ),
-            Text(
-              'We are here to help each other by sharing, learning, coping, and healing together. Here\'s to that!',
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: ResponsiveWidget.isLargeScreen(context) ? 24 : 16,
-                fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'We are here to help each other by sharing, learning, coping, and healing together. Here\'s to that!',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: ResponsiveWidget.isLargeScreen(context)
+                      ? 24
+                      : ResponsiveWidget.isMediumScreen(context)
+                          ? 16
+                          : 14,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             Column(
@@ -103,7 +115,7 @@ class _AboutUsState extends State<AboutUs> {
                       ? null
                       : EdgeInsets.only(top: 30),
                   height: ResponsiveWidget.isSmallScreen(context)
-                      ? MediaQuery.of(context).size.height * 0.7
+                      ? MediaQuery.of(context).size.height * 0.6
                       : ResponsiveWidget.isLargeScreen(context)
                           ? MediaQuery.of(context).size.height * 0.32
                           : MediaQuery.of(context).size.height * 0.4,
@@ -124,7 +136,7 @@ class _AboutUsState extends State<AboutUs> {
                         });
                       },
                       aspectRatio: 1,
-                      enlargeCenterPage: true,
+                      //enlargeCenterPage: true,
                       enableInfiniteScroll: true,
                       initialPage: 0,
                     ),

@@ -63,20 +63,26 @@ class _ContactUsState extends State<ContactUs> {
                           Container(
                             child: Image.asset(
                               'insta.png',
-                              scale: ResponsiveWidget.isMediumScreen(context)
-                                  ? 25
-                                  : 15,
+                              scale: ResponsiveWidget.isLargeScreen(context)
+                                  ? 15
+                                  : ResponsiveWidget.isMediumScreen(context)
+                                      ? 25
+                                      : 35,
                             ),
                           ),
                           SizedBox(
                             height: 10,
                           ),
                           Text(
-                            '@huesofthemind',
+                            ResponsiveWidget.isSmallScreen(context)
+                                ? 'Instagram'
+                                : '@huesofthemind',
                             style: TextStyle(
                               fontSize: ResponsiveWidget.isLargeScreen(context)
                                   ? 22
-                                  : 14,
+                                  : ResponsiveWidget.isMediumScreen(context)
+                                      ? 14
+                                      : 12,
                             ),
                           )
                         ],
@@ -98,7 +104,9 @@ class _ContactUsState extends State<ContactUs> {
                               'twitter.png',
                               scale: ResponsiveWidget.isMediumScreen(context)
                                   ? 8
-                                  : 5,
+                                  : ResponsiveWidget.isLargeScreen(context)
+                                      ? 5
+                                      : 12,
                             ),
                           ),
                           SizedBox(
@@ -109,7 +117,9 @@ class _ContactUsState extends State<ContactUs> {
                             style: TextStyle(
                               fontSize: ResponsiveWidget.isLargeScreen(context)
                                   ? 22
-                                  : 14,
+                                  : ResponsiveWidget.isMediumScreen(context)
+                                      ? 14
+                                      : 12,
                             ),
                           )
                         ],
@@ -128,21 +138,27 @@ class _ContactUsState extends State<ContactUs> {
                         children: [
                           Container(
                             child: Icon(
-                              Icons.email,
+                              Icons.email_rounded,
                               size: ResponsiveWidget.isMediumScreen(context)
                                   ? 70
-                                  : 120,
+                                  : ResponsiveWidget.isLargeScreen(context)
+                                      ? 120
+                                      : 50,
                             ),
                           ),
                           SizedBox(
                             height: 10,
                           ),
                           Text(
-                            'huesofthemind@gmail.com',
+                            ResponsiveWidget.isSmallScreen(context)
+                                ? 'Email'
+                                : 'huesofthemind@gmail.com',
                             style: TextStyle(
                               fontSize: ResponsiveWidget.isLargeScreen(context)
                                   ? 22
-                                  : 14,
+                                  : ResponsiveWidget.isMediumScreen(context)
+                                      ? 14
+                                      : 12,
                             ),
                           )
                         ],
