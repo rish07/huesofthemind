@@ -223,7 +223,7 @@ Card smallProfileCard(
               AutoSizeText(
                 name,
                 maxLines: 1,
-                style: TextStyle(fontSize: 25),
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -234,7 +234,6 @@ Card smallProfileCard(
                 maxLines: 6,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontFamily: 'Satisfy',
                   fontSize: 14,
                 ),
               ),

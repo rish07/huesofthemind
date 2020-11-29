@@ -24,7 +24,8 @@ class _AboutEventsState extends State<AboutEvents> {
                     fontFamily: 'Caveat'),
               ),
               leading: CircleAvatar(
-                child: Image.asset('logo.png'),
+                backgroundImage: AssetImage('logo.png'),
+                backgroundColor: Colors.transparent,
               ),
               elevation: 0,
               backgroundColor: Colors.transparent,
@@ -287,7 +288,7 @@ class _AboutEventsState extends State<AboutEvents> {
                                       height: 10,
                                     ),
                                     Text(
-                                      "We can call ourselves us a Safe Space, a platform for Self Help and a way to encourage Mental Health Awareness. We have collaborated with over 30+ organisations and mental health advocates to support the same cause.",
+                                      "We can call ourselves us a Safe Space, a platform for Self Help and a way to encourage Mental Health Awareness. We have collaborated with over 50+ organisations and mental health advocates to support the same cause.",
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontSize:
@@ -393,7 +394,7 @@ class _AboutEventsState extends State<AboutEvents> {
                             Column(
                               children: [
                                 Text(
-                                  'Vigils persuadere! Large, aged pudding is best rinsed with mild beer.Ahoy, oh.Huge, brave girls rudely fight a distant, calm cosmonaut.Real visions lead to the disconnection.The queen is always final.Why does the admiral walk?',
+                                  "We started as an Instagram page in May, 2019 with a vision of providing a home for people to share their feelings and be themselves. We are not professionals, but help people to get the help they deserve. We are a bridge connecting people in need with designated mental health professionals. We never know when a small gesture can be a step to the stairway of hope for someone.",
                                   style: TextStyle(
                                     color: Colors.grey,
                                     fontSize: 14,
@@ -405,7 +406,7 @@ class _AboutEventsState extends State<AboutEvents> {
                                   height: 10,
                                 ),
                                 Text(
-                                  'Vigils persuadere! Large, aged pudding is best rinsed with mild beer.Ahoy, oh.Huge, brave girls rudely fight a distant, calm cosmonaut.Real visions lead to the disconnection.The queen is always final.Why does the admiral walk?',
+                                  "We can call ourselves us a Safe Space, a platform for Self Help and a way to encourage Mental Health Awareness. We have collaborated with over 30+ organisations and mental health advocates to support the same cause.",
                                   style: TextStyle(
                                     color: Colors.grey,
                                     fontSize: 14,

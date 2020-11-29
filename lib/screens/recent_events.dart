@@ -65,15 +65,17 @@ class _RecentEventsState extends State<RecentEvents> {
                           ),
                           eventCard(
                             context,
-                            imageAssetLink: 'empower.png',
-                            eventName: "Empower: Where Empathy is Your Power",
-                            readMore: 'https://empower-hotm.web.app/#/',
+                            imageAssetLink: 'beKind.jpeg',
+                            eventName: "How to be Kind to Your Mind",
+                            readMore:
+                                'https://www.instagram.com/tv/CErTUJAC262/',
                           ),
                           eventCard(
                             context,
-                            imageAssetLink: 'empower.png',
-                            eventName: "Empower: Where Empathy is Your Power",
-                            readMore: 'https://empower-hotm.web.app/#/',
+                            imageAssetLink: 'soulful.jpg',
+                            eventName: "Soulful- Connecting with Yourself",
+                            readMore:
+                                'https://www.instagram.com/p/CIBEb5NhdZ0/',
                           ),
                         ],
                       )
@@ -99,10 +101,10 @@ class _RecentEventsState extends State<RecentEvents> {
                               Container(
                                 child: eventCard(
                                   context,
-                                  imageAssetLink: 'empower.png',
-                                  eventName:
-                                      "Empower: Where Empathy is Your Power",
-                                  readMore: 'https://empower-hotm.web.app/#/',
+                                  imageAssetLink: 'beKind.jpeg',
+                                  eventName: "How to be Kind to Your Mind",
+                                  readMore:
+                                      'https://www.instagram.com/tv/CErTUJAC262/',
                                 ),
                               ),
                             ],
@@ -113,10 +115,11 @@ class _RecentEventsState extends State<RecentEvents> {
                               Container(
                                 child: eventCard(
                                   context,
-                                  imageAssetLink: 'empower.png',
+                                  imageAssetLink: 'soulful.jpg',
                                   eventName:
-                                      "Empower: Where Empathy is Your Power",
-                                  readMore: 'https://empower-hotm.web.app/#/',
+                                      "Soulful- Connecting with Yourself",
+                                  readMore:
+                                      'https://www.instagram.com/p/CIBEb5NhdZ0/',
                                 ),
                               ),
                             ],
@@ -163,58 +166,74 @@ class _RecentEventsState extends State<RecentEvents> {
         child: Card(
           elevation: isSmall ? 8 : 10,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                child: Image.asset(imageAssetLink),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  eventName,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: ResponsiveWidget.isLargeScreen(context) ? 24 : 18,
+              Expanded(
+                flex: !ResponsiveWidget.isSmallScreen(context) ? 4 : 2,
+                child: Container(
+                  child: Image.asset(
+                    imageAssetLink,
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    RaisedButton(
-                      color: Colors.white,
-                      hoverColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          side: BorderSide(
-                        color: yellowColor,
-                        width: 3,
-                      )),
-                      padding: isSmall
-                          ? EdgeInsets.all(8)
-                          : EdgeInsets.symmetric(
-                              vertical: 16,
-                              horizontal: 32,
-                            ),
-                      onPressed: () {
-                        html.window.open(readMore, 'Post Link');
-                      },
-                      child: Text(
-                        'Read More',
-                        style: TextStyle(
-                          fontSize: isSmall
-                              ? 12
-                              : ResponsiveWidget.isLargeScreen(context)
-                                  ? 18
-                                  : 14,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
+              Expanded(
+                child: Container(
+                  child: Padding(
+                    padding:
+                        EdgeInsets.only(left: 8.0,right:8 ,top: 12,bottom: 8),
+                    child: Text(
+                      eventName,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize:
+                            ResponsiveWidget.isLargeScreen(context) ? 24 : 18,
                       ),
                     ),
-                  ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        RaisedButton(
+                          color: Colors.white,
+                          hoverColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                            color: yellowColor,
+                            width: 3,
+                          )),
+                          padding: isSmall
+                              ? EdgeInsets.all(8)
+                              : EdgeInsets.symmetric(
+                                  vertical: 16,
+                                  horizontal: 32,
+                                ),
+                          onPressed: () {
+                            html.window.open(readMore, 'Post Link');
+                          },
+                          child: Text(
+                            'Read More',
+                            style: TextStyle(
+                              fontSize: isSmall
+                                  ? 12
+                                  : ResponsiveWidget.isLargeScreen(context)
+                                      ? 18
+                                      : 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ],
