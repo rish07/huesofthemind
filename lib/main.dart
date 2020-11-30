@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: "Huesofthemind | Home",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'Montserrat'),
       home: LandingPage(),

@@ -168,15 +168,15 @@ Card profileCard(
                     AutoSizeText(
                       name,
                       maxLines: 1,
-                      style: TextStyle(fontSize: 40),
+                      style: TextStyle(fontSize: 30),
                     ),
                     GestureDetector(
                       onTap: () {
                         html.window.open(instaLink, 'Post Link');
                       },
                       child: Container(
-                        height: 35,
-                        width: 35,
+                        height: 30,
+                        width: 30,
                         child: Image.asset('insta.png'),
                       ),
                     ),
@@ -188,7 +188,7 @@ Card profileCard(
                 Text(
                   caption,
                   textAlign: TextAlign.justify,
-                  style: TextStyle(fontFamily: 'Satisfy', fontSize: 25),
+                  style: TextStyle(fontFamily: 'Satisfy', fontSize: 18),
                 ),
               ],
             ),
@@ -223,7 +223,7 @@ Card smallProfileCard(
               AutoSizeText(
                 name,
                 maxLines: 1,
-                style: TextStyle(fontSize: 25),
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -234,7 +234,6 @@ Card smallProfileCard(
                 maxLines: 6,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontFamily: 'Satisfy',
                   fontSize: 14,
                 ),
               ),
